@@ -1,4 +1,3 @@
-import * as path from "path";
 import { Construct } from "constructs";
 import * as codeCommit from "aws-cdk-lib/aws-codecommit";
 
@@ -19,9 +18,6 @@ export class Repository extends Construct {
 
     this.repository = new codeCommit.Repository(this, repositoryName, {
       repositoryName,
-      code: codeCommit.Code.fromDirectory(
-        path.resolve(__dirname, "../../../app")
-      ),
     });
   }
 }
