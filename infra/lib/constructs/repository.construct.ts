@@ -3,7 +3,7 @@ import * as codeCommit from "aws-cdk-lib/aws-codecommit";
 
 import * as constants from "../constants";
 
-interface RepositoryProps {}
+export interface RepositoryProps {}
 
 /**
  * Creates a CodeCommit repository to store the application and infrastructure code
