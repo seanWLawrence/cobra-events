@@ -11,13 +11,15 @@ export class InfraStack extends cdk.Stack {
 
     this.assertContextValuesExist();
 
-    new constructs.Repository(this, "Repository");
+    const { repository } = new constructs.Repository(this, "Repository");
+
+    new constructs.Hosting(this, "Hosting", { repository });
   }
 
   /**
    * Ensure all context values exist before attempting to initialize the contstructs that use them
    */
-  public assertContextValuesExist() {
+  private assertContextValuesExist() {
     for (const contextId in constants.context) {
       const contextValue = this.node.tryGetContext(contextId);
 

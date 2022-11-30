@@ -5,7 +5,7 @@ import * as utils from "../utils";
 
 test("matches snapshot", () => {
   const app = new cdk.App({ context: utils.getContext() });
-  const stack = new infra.InfraStack(app, "TestStack");
+  const stack = new infra.InfraStack(app, "StubStack");
   const template = Template.fromStack(stack);
 
   expect(template.toJSON()).toMatchSnapshot();
