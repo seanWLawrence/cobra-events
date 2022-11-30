@@ -1,14 +1,30 @@
-# Welcome to your CDK TypeScript project
+# Cobra events infra
 
-This is a blank project for CDK development with TypeScript.
+This package contains the cloud infrastructure for this application.
 
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
+## Configuration
 
-## Useful commands
+Configuration is done through context.
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
-* `cdk deploy`      deploy this stack to your default AWS account/region
-* `cdk diff`        compare deployed stack with current state
-* `cdk synth`       emits the synthesized CloudFormation template
+1. Create a context file
+
+```sh
+cp cdk.context.example.json cdk.context.json
+```
+
+2. Change the values to match your needs
+
+## Deployment
+
+1. Authenticate your terminal to your AWS account
+2. Bootstrap your AWS account for CDK deployments
+
+```sh
+npm run cdk bootstrap
+```
+
+3. Deploy to your AWS account
+
+```sh
+npm run cdk deploy
+```

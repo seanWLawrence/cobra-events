@@ -15,6 +15,6 @@
   "@aws-cdk/aws-events:eventsTargetQueueSameAccount": true,
   "@aws-cdk/aws-iam:standardizedServicePrincipals": true,
   "@aws-cdk/aws-ecs:disableExplicitDeploymentControllerForCircuitBreaker": true,
-  "appName": "cobra.events",
-  "domain": "cobra.events"
+  "appName": "My app",
+  "domain": "example.com"
 }
