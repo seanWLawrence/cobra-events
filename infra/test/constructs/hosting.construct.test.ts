@@ -14,9 +14,6 @@ test("creates Amplify app", () => {
   template.hasResourceProperties("AWS::Amplify::App", {
     Name: app.node.tryGetContext(constants.context.appName),
     Repository: assertions.Match.anyValue(),
-    BasicAuthConfig: {
-      EnableBasicAuth: true,
-    },
     BuildSpec: assertions.Match.anyValue(),
   });
 
@@ -30,6 +27,9 @@ test("creates Amplify app", () => {
     BranchName: "dev",
     EnableAutoBuild: true,
     EnablePullRequestPreview: true,
+    BasicAuthConfig: {
+      EnableBasicAuth: true,
+    },
   });
 
   template.hasResourceProperties("AWS::Amplify::Domain", {

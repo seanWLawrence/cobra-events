@@ -28,3 +28,6 @@ npm run cdk bootstrap
 ```sh
 npm run cdk deploy
 ```
+
+4. Update your DNS records to have Amplify hosting point to your domain
+5. Log into secrets manager and save your password for basic auth on your dev branch. Your username will be `admin`

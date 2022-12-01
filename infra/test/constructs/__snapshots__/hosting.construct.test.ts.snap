@@ -10,34 +10,10 @@ Object {
     },
   },
   "Resources": Object {
-    "HostingAmplifyAppAppBasicAuthE765CD27": Object {
-      "DeletionPolicy": "Delete",
-      "Properties": Object {
-        "GenerateSecretString": Object {
-          "GenerateStringKey": "password",
-          "SecretStringTemplate": "{\\"username\\":\\"admin\\"}",
-        },
-      },
-      "Type": "AWS::SecretsManager::Secret",
-      "UpdateReplacePolicy": "Delete",
-    },
     "HostingAmplifyAppD0A66DD7": Object {
       "Properties": Object {
         "BasicAuthConfig": Object {
-          "EnableBasicAuth": true,
-          "Password": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "{{resolve:secretsmanager:",
-                Object {
-                  "Ref": "HostingAmplifyAppAppBasicAuthE765CD27",
-                },
-                ":SecretString:password::}}",
-              ],
-            ],
-          },
-          "Username": "admin",
+          "EnableBasicAuth": false,
         },
         "BuildSpec": "version: \\"1.0\\"
 frontend:
@@ -175,11 +151,38 @@ frontend:
             "AppId",
           ],
         },
+        "BasicAuthConfig": Object {
+          "EnableBasicAuth": true,
+          "Password": Object {
+            "Fn::Join": Array [
+              "",
+              Array [
+                "{{resolve:secretsmanager:",
+                Object {
+                  "Ref": "HostingAmplifyAppdevdevBasicAuth51493F8F",
+                },
+                ":SecretString:password::}}",
+              ],
+            ],
+          },
+          "Username": "admin",
+        },
         "BranchName": "dev",
         "EnableAutoBuild": true,
         "EnablePullRequestPreview": true,
       },
       "Type": "AWS::Amplify::Branch",
+    },
+    "HostingAmplifyAppdevdevBasicAuth51493F8F": Object {
+      "DeletionPolicy": "Delete",
+      "Properties": Object {
+        "GenerateSecretString": Object {
+          "GenerateStringKey": "password",
+          "SecretStringTemplate": "{\\"username\\":\\"admin\\"}",
+        },
+      },
+      "Type": "AWS::SecretsManager::Secret",
+      "UpdateReplacePolicy": "Delete",
     },
     "HostingAmplifyAppmainF19A1BC7": Object {
       "Properties": Object {
