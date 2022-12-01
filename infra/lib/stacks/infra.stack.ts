@@ -14,6 +14,8 @@ export class InfraStack extends cdk.Stack {
     const { repository } = new constructs.Repository(this, "Repository");
 
     new constructs.Hosting(this, "Hosting", { repository });
+
+    new constructs.Api(this, "Api", {});
   }
 
   /**
