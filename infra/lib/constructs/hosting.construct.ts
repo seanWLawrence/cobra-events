@@ -25,7 +25,7 @@ export class Hosting extends Construct {
         frontend: {
           phases: {
             preBuild: {
-              commands: ["npm ci"],
+              commands: ["cd app", "npm ci"],
             },
             build: {
               commands: [
