@@ -1,15 +1,30 @@
+import classNames from "classnames";
 import { classed } from "@tw-classed/react";
 
-export const Button = classed("button", " font-bold py-2 px-4 rounded-md", {
-  variants: {
-    color: {
-      primary: "text-white bg-blue-500",
-      secondary: "text-black bg-transparent outline",
+import * as theme from "../../styles/theme";
+
+export const Button = classed(
+  "button",
+  classNames(
+    theme.padding.formElement,
+    theme.font.formElement,
+    theme.text.formElement,
+    theme.rounded,
+    theme.activeState,
+    theme.inactiveState.button,
+    theme.border
+  ),
+  {
+    variants: {
+      color: {
+        primary: "bg-indigo-600 text-white",
+        secondary: "bg-transparent text-indigo-600",
+      },
+      defaultVariants: {
+        color: "primary",
+      },
     },
-    defaultVariants: {
-      color: "secondary",
-    },
-  },
-});
+  }
+);
 
 export type ButtonProps = React.ComponentProps<typeof Button>;
