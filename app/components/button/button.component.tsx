@@ -17,8 +17,10 @@ export const Button = classed(
   {
     variants: {
       color: {
-        primary: "bg-indigo-600 text-white",
-        secondary: "bg-transparent text-indigo-600",
+        primary:
+          "bg-indigo-600 text-white hover:bg-indigo-700 focus:bg-indigo-700",
+        secondary:
+          "bg-transparent text-indigo-600 hover:bg-indigo-50 focus:bg-indigo-50",
       },
       defaultVariants: {
         color: "primary",
