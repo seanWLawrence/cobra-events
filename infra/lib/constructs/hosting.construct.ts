@@ -15,34 +15,35 @@ export class Hosting extends Construct {
 
     this.amplifyApp = new amplify.App(this, "AmplifyApp", {
       appName: this.node.tryGetContext(constants.context.appName),
-      sourceCodeProvider: new amplify.GitHubSourceCodeProvider({
-        owner: "seanWLawrence",
-        repository: "cobra.events",
-        oauthToken: cdk.SecretValue.secretsManager("github-token"),
-      }),
+      environmentVariables: { AMPLIFY_MONOREPO_APP_ROOT: "app" },
       buildSpec: codeBuild.BuildSpec.fromObjectToYaml({
         version: "1.0",
-        frontend: {
-          phases: {
-            preBuild: {
-              commands: ["cd app", "npm ci"],
+        applications: [
+          {
+            appRoot: "app",
+            frontend: {
+              phases: {
+                preBuild: {
+                  commands: ["npm ci"],
+                },
+                build: {
+                  commands: [
+                    // Example for setting environment variables that Next.js can use
+                    // "env | grep -e DB_HOST -e DB_USER -e DB_PASS >> .env.production",
+                    "npm run build",
+                  ],
+                },
+              },
+              artifacts: {
+                baseDirectory: ".next",
+                files: ["**/*"],
+              },
+              cache: {
+                paths: ["node_modules/**/*", ".next/cache/**/*"],
+              },
             },
-            build: {
-              commands: [
-                // Example for setting environment variables that Next.js can use
-                // "env | grep -e DB_HOST -e DB_USER -e DB_PASS >> .env.production",
-                "npm run build",
-              ],
-            },
           },
-          artifacts: {
-            baseDirectory: "app/.next",
-            files: ["**/*"],
-          },
-          cache: {
-            paths: ["app/node_modules/**/*", "app/.next/cache/**/*"],
-          },
-        },
+        ],
       }),
     });
 
