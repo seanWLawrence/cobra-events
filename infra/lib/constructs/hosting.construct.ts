@@ -47,7 +47,7 @@ export class Hosting extends Construct {
     });
 
     const dev = this.amplifyApp.addBranch("dev", {
-      basicAuth: amplify.BasicAuth.fromGeneratedPassword("admin"),
+      // basicAuth: amplify.BasicAuth.fromGeneratedPassword("admin"),
     });
 
     const main = this.amplifyApp.addBranch("main");
