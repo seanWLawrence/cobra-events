@@ -1,19 +1,22 @@
 import * as cdk from "aws-cdk-lib";
+import * as codecommit from "aws-cdk-lib/aws-codecommit";
 import invariant from "tiny-invariant";
 import { Construct } from "constructs";
 
 import * as constructs from "../constructs/index.construct";
 import * as constants from "../constants";
 
+interface InfraStackProps extends cdk.StackProps {
+  readonly repository: codecommit.Repository;
+}
+
 export class InfraStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+  constructor(scope: Construct, id: string, props: InfraStackProps) {
     super(scope, id, props);
 
     this.assertContextValuesExist();
 
-    const { repository } = new constructs.Repository(this, "Repository");
-
-    new constructs.Hosting(this, "Hosting", { repository });
+    new constructs.Hosting(this, "Hosting", { repository: props.repository });
 
     new constructs.Api(this, "Api", {});
   }

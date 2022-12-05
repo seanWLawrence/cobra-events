@@ -29,5 +29,6 @@ npm run cdk bootstrap
 npm run cdk deploy
 ```
 
-4. Update your DNS records to have Amplify hosting point to your domain
-5. Log into secrets manager and save your password for basic auth on your dev branch. Your username will be `admin`
+4. Go to the AWS CloudFormation console and click on "Events". Search for the AWS Certificate Manager values and enter them into your DNS provider
+5. Update your DNS records to have Amplify hosting point to your domain
+6. Log into secrets manager and save your password for basic auth on your dev branch. Your username will be `admin`

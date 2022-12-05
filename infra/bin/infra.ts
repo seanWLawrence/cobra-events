@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 import "source-map-support/register";
 import * as cdk from "aws-cdk-lib";
-import { InfraStack } from "../lib/stacks/infra.stack";
+import { InfraPipelineStack } from "../lib/stacks/infra-pipeline.stack";
 
 const app = new cdk.App();
-new InfraStack(app, "InfraStack", {
+new InfraPipelineStack(app, "InfraPipelineStack", {
   /* If you don't specify 'env', this stack will be environment-agnostic.
    * Account/Region-dependent features and context lookups will not work,
    * but a single synthesized template can be deployed anywhere. */
