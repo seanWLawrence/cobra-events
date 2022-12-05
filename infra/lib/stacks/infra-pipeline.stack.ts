@@ -29,7 +29,16 @@ export class InfraPipelineStack extends cdk.Stack {
       constants.context.githubOwner
     )}/${this.node.tryGetContext(constants.context.appName)}`;
 
-    const pipeline = new pipelines.CodePipeline(this, "Pipeline", {
+    const devPipeline = new pipelines.CodePipeline(this, "PipelineDev", {
+      synth: new pipelines.ShellStep("Synth", {
+        input: pipelines.CodePipelineSource.gitHub(repoString, "dev"),
+        installCommands: ["cd infra", "npm ci"],
+        commands: ["npm run build", "npx cdk synth"],
+        primaryOutputDirectory: "infra/cdk.out",
+      }),
+    });
+
+    const prodPipeline = new pipelines.CodePipeline(this, "PipelineProd", {
       synth: new pipelines.ShellStep("Synth", {
         input: pipelines.CodePipelineSource.gitHub(repoString, "main"),
         installCommands: ["cd infra", "npm ci"],
@@ -38,6 +47,7 @@ export class InfraPipelineStack extends cdk.Stack {
       }),
     });
 
-    pipeline.addStage(new InfraStage(this, "AppStage", {}));
+    devPipeline.addStage(new InfraStage(this, "AppStageDev", {}));
+    prodPipeline.addStage(new InfraStage(this, "AppStageProd", {}));
   }
 }
