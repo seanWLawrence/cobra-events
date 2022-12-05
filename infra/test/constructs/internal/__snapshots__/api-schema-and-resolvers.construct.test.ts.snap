@@ -1,0 +1,169 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+Object {
+  "Parameters": Object {
+    "BootstrapVersion": Object {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": Object {
+    "ApiSchemaAndResolversStubDataSourceD27C846A": Object {
+      "Properties": Object {
+        "ApiId": Object {
+          "Fn::GetAtt": Array [
+            "GraphqlApi1B6CF24C",
+            "ApiId",
+          ],
+        },
+        "Description": "Stubbed data source for testing the API schema",
+        "Name": "Stub",
+        "Type": "NONE",
+      },
+      "Type": "AWS::AppSync::DataSource",
+    },
+    "GraphqlApi1B6CF24C": Object {
+      "Properties": Object {
+        "AuthenticationType": "API_KEY",
+        "Name": "STUB",
+      },
+      "Type": "AWS::AppSync::GraphQLApi",
+    },
+    "GraphqlApiDefaultApiKey47EE7128": Object {
+      "DependsOn": Array [
+        "GraphqlApiSchema1B71CE4F",
+      ],
+      "Properties": Object {
+        "ApiId": Object {
+          "Fn::GetAtt": Array [
+            "GraphqlApi1B6CF24C",
+            "ApiId",
+          ],
+        },
+      },
+      "Type": "AWS::AppSync::ApiKey",
+    },
+    "GraphqlApiQueryartistResolver7140AC46": Object {
+      "DependsOn": Array [
+        "ApiSchemaAndResolversStubDataSourceD27C846A",
+        "GraphqlApiSchema1B71CE4F",
+      ],
+      "Properties": Object {
+        "ApiId": Object {
+          "Fn::GetAtt": Array [
+            "GraphqlApi1B6CF24C",
+            "ApiId",
+          ],
+        },
+        "DataSourceName": "Stub",
+        "FieldName": "artist",
+        "Kind": "UNIT",
+        "RequestMappingTemplate": "{
+  \\"version\\": \\"2018-05-29\\",
+  \\"payload\\": {
+    \\"id\\": \\"some id\\",
+    \\"name\\": \\"Some band\\",
+    \\"bio\\": \\"Some bio\\",
+    \\"socialMediaProfiles\\": [
+      {
+        \\"id\\": \\"some id\\",
+        \\"platform\\": \\"YOUTUBE\\",
+        \\"url\\": \\"https://youtube.com/some-band\\"
+      }
+    ]
+  }
+}",
+        "ResponseMappingTemplate": "$util.toJson($context.result)",
+        "TypeName": "Query",
+      },
+      "Type": "AWS::AppSync::Resolver",
+    },
+    "GraphqlApiSchema1B71CE4F": Object {
+      "Properties": Object {
+        "ApiId": Object {
+          "Fn::GetAtt": Array [
+            "GraphqlApi1B6CF24C",
+            "ApiId",
+          ],
+        },
+        "Definition": "schema {
+  query: Query
+}
+interface Node {
+  id: ID!
+}
+enum SocialMediaPlatform {
+  YOUTUBE
+  FACEBOOK
+  INSTAGRAM
+  TIKTOK
+  TWITTER
+}
+type SocialMediaProfileNode implements Node {
+  platform: SocialMediaPlatform!
+  url: AWSURL!
+  id: ID!
+}
+type SocialMediaProfileNodeEdge {
+  node: SocialMediaProfileNode!
+  nextToken: String
+}
+type SocialMediaProfileNodeConnection {
+  edges: [SocialMediaProfileNodeEdge]!
+  SocialMediaProfileNodes: [SocialMediaProfileNode]!
+  totalCount: Int!
+}
+type ArtistNode implements Node {
+  name: String!
+  bio: String!
+  socialMediaProfiles: [SocialMediaProfileNode]!
+  id: ID!
+}
+type ArtistNodeEdge {
+  node: ArtistNode!
+  nextToken: String
+}
+type ArtistNodeConnection {
+  edges: [ArtistNodeEdge]!
+  ArtistNodes: [ArtistNode]!
+  totalCount: Int!
+}
+type Query {
+  artist(id: ID!): ArtistNode
+}
+",
+      },
+      "Type": "AWS::AppSync::GraphQLSchema",
+    },
+  },
+  "Rules": Object {
+    "CheckBootstrapVersion": Object {
+      "Assertions": Array [
+        Object {
+          "Assert": Object {
+            "Fn::Not": Array [
+              Object {
+                "Fn::Contains": Array [
+                  Array [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  Object {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;

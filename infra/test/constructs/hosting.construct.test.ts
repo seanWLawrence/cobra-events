@@ -1,18 +1,19 @@
 import * as cdk from "aws-cdk-lib";
 import * as assertions from "aws-cdk-lib/assertions";
-import * as infra from "../../lib/stacks/infra.stack";
 import * as constants from "../../lib/constants";
 import * as constructs from "../../lib/constructs/index.construct";
 import * as utils from "../utils";
-import { Construct } from "constructs";
 
 test("creates Amplify app", () => {
-  const app = new cdk.App({ context: utils.getContext() });
-  const stack = new infra.InfraStack(app, "TestStack");
+  const stack = utils.stubStack((scope) => {
+    const { repository } = new constructs.Repository(scope, "Repository");
+
+    new constructs.Hosting(scope, "Hosting", { repository });
+  });
   const template = assertions.Template.fromStack(stack);
 
   template.hasResourceProperties("AWS::Amplify::App", {
-    Name: app.node.tryGetContext(constants.context.appName),
+    Name: stack.node.tryGetContext(constants.context.appName),
     Repository: assertions.Match.anyValue(),
     BuildSpec: assertions.Match.anyValue(),
   });
@@ -27,13 +28,10 @@ test("creates Amplify app", () => {
     BranchName: "dev",
     EnableAutoBuild: true,
     EnablePullRequestPreview: true,
-    BasicAuthConfig: {
-      EnableBasicAuth: true,
-    },
   });
 
   template.hasResourceProperties("AWS::Amplify::Domain", {
-    DomainName: app.node.tryGetContext(constants.context.domain),
+    DomainName: stack.node.tryGetContext(constants.context.domain),
     EnableAutoSubDomain: true,
     AutoSubDomainCreationPatterns: ["dev"],
     SubDomainSettings: assertions.Match.arrayWith([

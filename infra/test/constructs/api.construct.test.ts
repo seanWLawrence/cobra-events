@@ -1,17 +1,17 @@
 import * as cdk from "aws-cdk-lib";
 import * as assertions from "aws-cdk-lib/assertions";
-import * as infra from "../../lib/stacks/infra.stack";
 import * as constants from "../../lib/constants";
 import * as constructs from "../../lib/constructs/index.construct";
 import * as utils from "../utils";
 
-test("creates Amplify app", () => {
-  const app = new cdk.App({ context: utils.getContext() });
-  const stack = new infra.InfraStack(app, "TestStack");
+test("creates AppSync GraphQL Api", () => {
+  const stack = utils.stubStack((scope) => {
+    new constructs.Api(scope, "Api", {});
+  });
   const template = assertions.Template.fromStack(stack);
 
   template.hasResourceProperties("AWS::AppSync::GraphQLApi", {
-    Name: app.node.tryGetContext(constants.context.appName),
+    Name: stack.node.tryGetContext(constants.context.appName),
     AuthenticationType: "AWS_IAM",
     XrayEnabled: false,
     LogConfig: assertions.Match.objectLike({
@@ -21,12 +21,12 @@ test("creates Amplify app", () => {
   });
 
   template.hasResourceProperties("AWS::CertificateManager::Certificate", {
-    DomainName: app.node.tryGetContext(constants.context.domain),
+    DomainName: stack.node.tryGetContext(constants.context.domain),
     ValidationMethod: "DNS",
   });
 
   template.hasResourceProperties("AWS::AppSync::DomainName", {
-    DomainName: `api.${app.node.tryGetContext(constants.context.domain)}`,
+    DomainName: `api.${stack.node.tryGetContext(constants.context.domain)}`,
     CertificateArn: assertions.Match.anyValue(),
     Description: assertions.Match.anyValue(),
   });

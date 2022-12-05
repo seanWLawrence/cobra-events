@@ -6,12 +6,13 @@ import * as constants from "../../lib/constants";
 import * as utils from "../utils";
 
 test("creates CodeCommit repository", () => {
-  const app = new cdk.App({ context: utils.getContext() });
-  const stack = new infra.InfraStack(app, "TestStack");
+  const stack = utils.stubStack((scope) => {
+    new constructs.Repository(scope, "Repository");
+  });
   const template = Template.fromStack(stack);
 
   template.hasResourceProperties("AWS::CodeCommit::Repository", {
-    RepositoryName: app.node.tryGetContext(constants.context.appName),
+    RepositoryName: stack.node.tryGetContext(constants.context.appName),
   });
 });
 

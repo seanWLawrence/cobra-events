@@ -20,6 +20,7 @@ frontend:
   phases:
     preBuild:
       commands:
+        - cd app
         - npm ci
     build:
       commands:
@@ -151,38 +152,11 @@ frontend:
             "AppId",
           ],
         },
-        "BasicAuthConfig": Object {
-          "EnableBasicAuth": true,
-          "Password": Object {
-            "Fn::Join": Array [
-              "",
-              Array [
-                "{{resolve:secretsmanager:",
-                Object {
-                  "Ref": "HostingAmplifyAppdevdevBasicAuth51493F8F",
-                },
-                ":SecretString:password::}}",
-              ],
-            ],
-          },
-          "Username": "admin",
-        },
         "BranchName": "dev",
         "EnableAutoBuild": true,
         "EnablePullRequestPreview": true,
       },
       "Type": "AWS::Amplify::Branch",
-    },
-    "HostingAmplifyAppdevdevBasicAuth51493F8F": Object {
-      "DeletionPolicy": "Delete",
-      "Properties": Object {
-        "GenerateSecretString": Object {
-          "GenerateStringKey": "password",
-          "SecretStringTemplate": "{\\"username\\":\\"admin\\"}",
-        },
-      },
-      "Type": "AWS::SecretsManager::Secret",
-      "UpdateReplacePolicy": "Delete",
     },
     "HostingAmplifyAppmainF19A1BC7": Object {
       "Properties": Object {

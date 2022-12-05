@@ -10,6 +10,20 @@ Object {
     },
   },
   "Resources": Object {
+    "ApiApiSchemaAndResolversStubDataSourceAEB8B4CD": Object {
+      "Properties": Object {
+        "ApiId": Object {
+          "Fn::GetAtt": Array [
+            "ApiGraphQLApiAEA06692",
+            "ApiId",
+          ],
+        },
+        "Description": "Stubbed data source for testing the API schema",
+        "Name": "Stub",
+        "Type": "NONE",
+      },
+      "Type": "AWS::AppSync::DataSource",
+    },
     "ApiCertificate285C31EB": Object {
       "Properties": Object {
         "DomainName": "cobra.events",
@@ -138,8 +152,8 @@ Object {
     },
     "ApiGraphQLApiQueryartistResolver80E20D35": Object {
       "DependsOn": Array [
+        "ApiApiSchemaAndResolversStubDataSourceAEB8B4CD",
         "ApiGraphQLApiSchema54725A92",
-        "ApiStubDataSource254E6DA9",
       ],
       "Properties": Object {
         "ApiId": Object {
@@ -151,18 +165,22 @@ Object {
         "DataSourceName": "Stub",
         "FieldName": "artist",
         "Kind": "UNIT",
-        "ResponseMappingTemplate": "{
-  \\"id\\": \\"some id\\",
-  \\"name\\": \\"Some band\\",
-  \\"bio\\": \\"Some bio\\",
-  \\"socialMediaProfiles\\": [
-    {
-      \\"id\\": \\"some id\\",
-      \\"platform\\": \\"YOUTUBE\\",
-      \\"url\\": \\"https://youtube.com/some-band\\"
-    }
-  ]
+        "RequestMappingTemplate": "{
+  \\"version\\": \\"2018-05-29\\",
+  \\"payload\\": {
+    \\"id\\": \\"some id\\",
+    \\"name\\": \\"Some band\\",
+    \\"bio\\": \\"Some bio\\",
+    \\"socialMediaProfiles\\": [
+      {
+        \\"id\\": \\"some id\\",
+        \\"platform\\": \\"YOUTUBE\\",
+        \\"url\\": \\"https://youtube.com/some-band\\"
+      }
+    ]
+  }
 }",
+        "ResponseMappingTemplate": "$util.toJson($context.result)",
         "TypeName": "Query",
       },
       "Type": "AWS::AppSync::Resolver",
@@ -223,20 +241,6 @@ type Query {
 ",
       },
       "Type": "AWS::AppSync::GraphQLSchema",
-    },
-    "ApiStubDataSource254E6DA9": Object {
-      "Properties": Object {
-        "ApiId": Object {
-          "Fn::GetAtt": Array [
-            "ApiGraphQLApiAEA06692",
-            "ApiId",
-          ],
-        },
-        "Description": "Stubbed data source for testing the API schema",
-        "Name": "Stub",
-        "Type": "NONE",
-      },
-      "Type": "AWS::AppSync::DataSource",
     },
     "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": Object {
       "DependsOn": Array [
