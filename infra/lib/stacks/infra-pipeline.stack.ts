@@ -11,7 +11,7 @@ class InfraStage extends cdk.Stage {
   constructor(scope: Construct, id: string, props: InfraStageProps = {}) {
     super(scope, id, props);
 
-    new InfraStack(this, "Infra", {});
+    new InfraStack(this, "InfraStack", {});
   }
 }
 
@@ -38,6 +38,6 @@ export class InfraPipelineStack extends cdk.Stack {
       }),
     });
 
-    pipeline.addStage(new InfraStage(this, "App", {}));
+    pipeline.addStage(new InfraStage(this, "AppStage", {}));
   }
 }
