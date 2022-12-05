@@ -40,7 +40,7 @@ export class Hosting extends Construct {
             files: ["**/*"],
           },
           cache: {
-            paths: ["node_modules/**/*", ".next/cache/**/*"],
+            paths: ["app/node_modules/**/*", "app/.next/cache/**/*"],
           },
         },
       }),
