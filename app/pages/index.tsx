@@ -65,8 +65,8 @@ export default function Home() {
             </components.Heading>
 
             <components.Paragraph>
-              I'm baby humblebrag hammock quinoa leggings cred lomo bruh twee
-              next level gochujang tofu mlkshk. Twee chambray pabst,
+              I&apos;m baby humblebrag hammock quinoa leggings cred lomo bruh
+              twee next level gochujang tofu mlkshk. Twee chambray pabst,
               lumbersexual farm-to-table jianbing whatever craft beer aesthetic
               umami. Vexillologist messenger bag ugh, venmo readymade waistcoat
               wolf polaroid direct trade seitan sartorial offal. Tonx kombucha
