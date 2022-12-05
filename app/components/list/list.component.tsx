@@ -13,7 +13,7 @@ export type ListItemProps = React.ComponentProps<typeof ListItem> & {};
 
 const BaseList = classed(
   "ul",
-  classNames("list-disc list-inside", theme.maxWidth.body),
+  classNames("list-disc list-inside space-y-6", theme.maxWidth.body),
   {
     variants: {},
   }

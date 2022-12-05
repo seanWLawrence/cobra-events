@@ -26,7 +26,6 @@ test("direction=vertical adds flex-col", () => {
     </SpaceBetween>
   );
 
-  // Testing parent element wrapper
   const wrapper = screen.getByTestId(testId).parentElement;
 
   expect(wrapper).toHaveClass("flex");
@@ -36,29 +35,27 @@ test("direction=vertical adds flex-col", () => {
 const sizes: SpaceBetweenProps["size"][] = ["s", "m", "l", "xl"];
 
 sizes.forEach((size) => {
-  test(`direction=vertical size=${size} passes  space-y classes`, () => {
+  test(`direction=vertical size=${size} passes gap-y classes`, () => {
     render(
       <SpaceBetween direction="vertical" size={size}>
         <div data-testid={testId}></div>
       </SpaceBetween>
     );
 
-    // Testing parent element since it wraps each child with margin
     const wrapper = screen.getByTestId(testId).parentElement;
 
-    expect(wrapper?.className).toMatch(/space-y-/g);
+    expect(wrapper?.className).toMatch(/gap-y-/g);
   });
 
-  test(`direction=horizontal size=${size} passes  space-x classes`, () => {
+  test(`direction=horizontal size=${size} passes gap-x classes`, () => {
     render(
       <SpaceBetween direction="horizontal" size={size}>
         <div data-testid={testId}></div>
       </SpaceBetween>
     );
 
-    // Testing parent element since it wraps each child with margin
     const wrapper = screen.getByTestId(testId).parentElement;
 
-    expect(wrapper?.className).toMatch(/space-x-/g);
+    expect(wrapper?.className).toMatch(/gap-x-/g);
   });
 });
