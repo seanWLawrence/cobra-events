@@ -1,5 +1,6 @@
 import * as cdk from "aws-cdk-lib";
 import * as pipelines from "aws-cdk-lib/pipelines";
+import * as codebuild from "aws-cdk-lib/aws-codebuild";
 import { Construct } from "constructs";
 import { InfraStack } from "./infra.stack";
 import * as constants from "../constants";
@@ -31,7 +32,9 @@ export class InfraPipelineStack extends cdk.Stack {
     const pipeline = new pipelines.CodePipeline(this, "Pipeline", {
       synth: new pipelines.ShellStep("Synth", {
         input: pipelines.CodePipelineSource.gitHub(repoString, "main"),
-        commands: ["npm ci", "npm run build", "npx cdk synth"],
+        installCommands: ["cd infra", "npm ci"],
+        commands: ["npm run build", "npx cdk synth"],
+        primaryOutputDirectory: "infra/cdk.out",
       }),
     });
 
