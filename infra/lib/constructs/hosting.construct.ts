@@ -1,24 +1,24 @@
+import * as cdk from "aws-cdk-lib";
 import * as amplify from "@aws-cdk/aws-amplify-alpha";
-import * as codeCommit from "aws-cdk-lib/aws-codecommit";
 import * as codeBuild from "aws-cdk-lib/aws-codebuild";
 import { Construct } from "constructs";
 
 import * as constants from "../constants";
 
-export interface HostingProps {
-  readonly repository: codeCommit.IRepository;
-}
+export interface HostingProps {}
 
 export class Hosting extends Construct {
   public readonly amplifyApp: amplify.App;
 
-  constructor(scope: Construct, id: string, props: HostingProps) {
+  constructor(scope: Construct, id: string, props: HostingProps = {}) {
     super(scope, id);
 
     this.amplifyApp = new amplify.App(this, "AmplifyApp", {
       appName: this.node.tryGetContext(constants.context.appName),
-      sourceCodeProvider: new amplify.CodeCommitSourceCodeProvider({
-        repository: props.repository,
+      sourceCodeProvider: new amplify.GitHubSourceCodeProvider({
+        owner: "seanWLawrence",
+        repository: "cobra.events",
+        oauthToken: cdk.SecretValue.secretsManager("github-token"),
       }),
       buildSpec: codeBuild.BuildSpec.fromObjectToYaml({
         version: "1.0",

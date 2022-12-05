@@ -16,5 +16,6 @@
   "@aws-cdk/aws-iam:standardizedServicePrincipals": true,
   "@aws-cdk/aws-ecs:disableExplicitDeploymentControllerForCircuitBreaker": true,
   "appName": "cobra.events",
-  "domain": "cobra.events"
+  "domain": "cobra.events",
+  "githubOwner": "seanWLawrence"
 }

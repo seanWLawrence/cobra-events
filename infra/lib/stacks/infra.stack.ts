@@ -1,5 +1,4 @@
 import * as cdk from "aws-cdk-lib";
-import * as codecommit from "aws-cdk-lib/aws-codecommit";
 import invariant from "tiny-invariant";
 import { Construct } from "constructs";
 
@@ -14,13 +13,7 @@ export class InfraStack extends cdk.Stack {
 
     this.assertContextValuesExist();
 
-    const repository = codecommit.Repository.fromRepositoryName(
-      this,
-      "Repository",
-      this.node.tryGetContext(constants.context.appName)
-    );
-
-    new constructs.Hosting(this, "Hosting", { repository });
+    new constructs.Hosting(this, "Hosting", {});
 
     new constructs.Api(this, "Api", {});
   }

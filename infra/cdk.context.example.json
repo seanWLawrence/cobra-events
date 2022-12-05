@@ -16,5 +16,6 @@
   "@aws-cdk/aws-iam:standardizedServicePrincipals": true,
   "@aws-cdk/aws-ecs:disableExplicitDeploymentControllerForCircuitBreaker": true,
   "appName": "My app",
-  "domain": "example.com"
+  "domain": "example.com",
+  "githubOwner": "myGithubUsername"
 }

@@ -6,9 +6,7 @@ import * as utils from "../utils";
 
 test("creates Amplify app", () => {
   const stack = utils.stubStack((scope) => {
-    const { repository } = new constructs.Repository(scope, "Repository");
-
-    new constructs.Hosting(scope, "Hosting", { repository });
+    new constructs.Hosting(scope, "Hosting", {});
   });
   const template = assertions.Template.fromStack(stack);
 
@@ -44,9 +42,7 @@ test("creates Amplify app", () => {
 
 test("matches snapshot", () => {
   const stack = utils.stubStack((scope) => {
-    const { repository } = new constructs.Repository(scope, "Repository");
-
-    new constructs.Hosting(scope, "Hosting", { repository });
+    new constructs.Hosting(scope, "Hosting", {});
   });
 
   const template = assertions.Template.fromStack(stack);

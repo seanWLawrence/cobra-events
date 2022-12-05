@@ -13,6 +13,7 @@ cp cdk.context.example.json cdk.context.json
 ```
 
 2. Change the values to match your needs
+3. Create a secret called `github-token` in secrets manager with your GitHub oauth token
 
 ## Deployment
 

@@ -258,13 +258,13 @@ frontend:
       commands:
         - npm run build
   artifacts:
-    baseDirectory: .next
+    baseDirectory: app/.next
     files:
       - \\"**/*\\"
   cache:
     paths:
-      - node_modules/**/*
-      - .next/cache/**/*
+      - app/node_modules/**/*
+      - app/.next/cache/**/*
 ",
         "IAMServiceRole": Object {
           "Fn::GetAtt": Array [
@@ -273,12 +273,8 @@ frontend:
           ],
         },
         "Name": "cobra.events",
-        "Repository": Object {
-          "Fn::GetAtt": Array [
-            "RepositorycobraeventsF5339E1F",
-            "CloneUrlHttp",
-          ],
-        },
+        "OauthToken": "{{resolve:secretsmanager:github-token:SecretString:::}}",
+        "Repository": "https://github.com/seanWLawrence/cobra.events",
       },
       "Type": "AWS::Amplify::App",
     },
@@ -298,32 +294,6 @@ frontend:
         },
       },
       "Type": "AWS::IAM::Role",
-    },
-    "HostingAmplifyAppRoleDefaultPolicy4C996CA1": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": "codecommit:GitPull",
-              "Effect": "Allow",
-              "Resource": Object {
-                "Fn::GetAtt": Array [
-                  "RepositorycobraeventsF5339E1F",
-                  "Arn",
-                ],
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-        "PolicyName": "HostingAmplifyAppRoleDefaultPolicy4C996CA1",
-        "Roles": Array [
-          Object {
-            "Ref": "HostingAmplifyAppRole2ED31E04",
-          },
-        ],
-      },
-      "Type": "AWS::IAM::Policy",
     },
     "HostingAmplifyAppcobraevents144D2F41": Object {
       "Properties": Object {
@@ -481,12 +451,6 @@ frontend:
         ],
       },
       "Type": "AWS::IAM::Policy",
-    },
-    "RepositorycobraeventsF5339E1F": Object {
-      "Properties": Object {
-        "RepositoryName": "cobra.events",
-      },
-      "Type": "AWS::CodeCommit::Repository",
     },
   },
   "Rules": Object {
