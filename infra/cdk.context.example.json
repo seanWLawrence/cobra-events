@@ -17,5 +17,6 @@
   "@aws-cdk/aws-ecs:disableExplicitDeploymentControllerForCircuitBreaker": true,
   "appName": "My app",
   "domain": "example.com",
-  "githubOwner": "myGithubUsername"
+  "githubOwner": "myGithubUsername",
+  "apiCertificateArn": "apiCertificateArn"
 }

@@ -17,5 +17,6 @@
   "@aws-cdk/aws-ecs:disableExplicitDeploymentControllerForCircuitBreaker": true,
   "appName": "cobra.events",
   "domain": "cobra.events",
-  "githubOwner": "seanWLawrence"
+  "githubOwner": "seanWLawrence",
+  "apiCertificateArn": "arn:aws:acm:us-east-1:512083878312:certificate/c5bfd2ac-f259-4c4f-8d42-34ae425777f2"
 }

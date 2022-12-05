@@ -2,34 +2,46 @@
 
 This package contains the cloud infrastructure for this application.
 
-## Configuration
+## Pre-requisites
 
-Configuration is done through context.
+- An AWS account
+- A GitHub account with this forked repository
+- A domain
 
-1. Create a context file
+## Getting started
+
+1. Create a certificate using AWS Certificate Manager with the format `api.${domain}`. You'll need to add a CNAME record to your DNS provider.
+1. Authenticate your terminal to your AWS account
+1. Create a personal access token in GitHub with permissions to read repository contents and read and write to the repository webhooks
+1. Create a secret called `github-token` in secrets manager with your GitHub oauth token
+1. Create a context file (see below)
+1. Enter the certificate's ARN into the `apiCertificateArn` field, the GitHub repository name under `appName` and the other self-explanatory fields at the bottom on the context file.
+1. Bootstrap your AWS account for CDK deployments
+1. Deploy to your AWS account
+1. Log in to Amplify and go to "Domain management" tab. Under "View DNS settings" you'll see ALIAS and CNAME records that you'll need to add to your DNS provider. Update your DNS provider's records to have Amplify hosting point to your domain
+
+## Command recipes
+
+Create context file
 
 ```sh
 cp cdk.context.example.json cdk.context.json
 ```
 
-2. Change the values to match your needs
-3. Create a secret called `github-token` in secrets manager with your GitHub oauth token
+Upload `github-token` secret into Secrets Manager
 
-## Deployment
+```sh
+aws secretsmanager create-secret --name github-token --secret-string <my-github-secret>
+```
 
-1. Authenticate your terminal to your AWS account
-2. Bootstrap your AWS account for CDK deployments
+Bootstrap your AWS account
 
 ```sh
 npm run cdk bootstrap
 ```
 
-3. Deploy to your AWS account
+Deploy to AWS account
 
 ```sh
 npm run cdk deploy
 ```
-
-4. Go to the AWS CloudFormation console and click on "Events". Search for the AWS Certificate Manager values and enter them into your DNS provider
-5. Update your DNS records to have Amplify hosting point to your domain
-6. Log into secrets manager and save your password for basic auth on your dev branch. Your username will be `admin`

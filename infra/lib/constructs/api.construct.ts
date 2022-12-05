@@ -21,13 +21,14 @@ export class Api extends Construct {
           authorizationType: appsync.AuthorizationType.IAM,
         },
       },
-      // domainName: {
-      //   domainName: `api.${this.node.tryGetContext(constants.context.domain)}`,
-      //   certificate: new certificateManager.Certificate(this, "Certificate", {
-      //     domainName: this.node.tryGetContext(constants.context.domain),
-      //     validation: certificateManager.CertificateValidation.fromDns(),
-      //   }),
-      // },
+      domainName: {
+        domainName: `api.${this.node.tryGetContext(constants.context.domain)}`,
+        certificate: certificateManager.Certificate.fromCertificateArn(
+          this,
+          "Certificate",
+          this.node.tryGetContext(constants.context.apiCertificateArn)
+        ),
+      },
       logConfig: {
         excludeVerboseContent: true,
         fieldLogLevel: appsync.FieldLogLevel.ERROR,
