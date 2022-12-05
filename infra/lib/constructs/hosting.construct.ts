@@ -36,7 +36,7 @@ export class Hosting extends Construct {
             },
           },
           artifacts: {
-            baseDirectory: ".next",
+            baseDirectory: "app/.next",
             files: ["**/*"],
           },
           cache: {
