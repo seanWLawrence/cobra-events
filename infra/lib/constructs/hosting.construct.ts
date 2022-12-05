@@ -6,7 +6,7 @@ import { Construct } from "constructs";
 import * as constants from "../constants";
 
 export interface HostingProps {
-  readonly repository: codeCommit.Repository;
+  readonly repository: codeCommit.IRepository;
 }
 
 export class Hosting extends Construct {

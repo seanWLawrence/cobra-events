@@ -5,15 +5,13 @@ import { Construct } from "constructs";
 import { InfraStack } from "./infra.stack";
 import * as constructs from "../constructs/index.construct";
 
-interface InfraStageProps extends cdk.StageProps {
-  readonly repository: codecommit.Repository;
-}
+interface InfraStageProps extends cdk.StageProps {}
 
 class InfraStage extends cdk.Stage {
-  constructor(scope: Construct, id: string, props: InfraStageProps) {
+  constructor(scope: Construct, id: string, props: InfraStageProps = {}) {
     super(scope, id, props);
 
-    new InfraStack(this, "Infra", { repository: props.repository });
+    new InfraStack(this, "Infra", {});
   }
 }
 
@@ -36,6 +34,6 @@ export class InfraPipelineStack extends cdk.Stack {
       }),
     });
 
-    pipeline.addStage(new InfraStage(this, "App", { repository }));
+    pipeline.addStage(new InfraStage(this, "App", {}));
   }
 }

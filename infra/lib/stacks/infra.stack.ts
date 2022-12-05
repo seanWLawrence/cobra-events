@@ -6,17 +6,21 @@ import { Construct } from "constructs";
 import * as constructs from "../constructs/index.construct";
 import * as constants from "../constants";
 
-interface InfraStackProps extends cdk.StackProps {
-  readonly repository: codecommit.Repository;
-}
+interface InfraStackProps extends cdk.StackProps {}
 
 export class InfraStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props: InfraStackProps) {
+  constructor(scope: Construct, id: string, props: InfraStackProps = {}) {
     super(scope, id, props);
 
     this.assertContextValuesExist();
 
-    new constructs.Hosting(this, "Hosting", { repository: props.repository });
+    const repository = codecommit.Repository.fromRepositoryName(
+      this,
+      "Repository",
+      this.node.tryGetContext(constants.context.appName)
+    );
+
+    new constructs.Hosting(this, "Hosting", { repository });
 
     new constructs.Api(this, "Api", {});
   }
