@@ -1,19 +1,19 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
 exports[`matches snapshot 1`] = `
-Object {
-  "Parameters": Object {
-    "BootstrapVersion": Object {
+{
+  "Parameters": {
+    "BootstrapVersion": {
       "Default": "/cdk-bootstrap/hnb659fds/version",
       "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
-  "Resources": Object {
-    "ApiSchemaAndResolversStubDataSourceD27C846A": Object {
-      "Properties": Object {
-        "ApiId": Object {
-          "Fn::GetAtt": Array [
+  "Resources": {
+    "ApiSchemaAndResolversStubDataSourceD27C846A": {
+      "Properties": {
+        "ApiId": {
+          "Fn::GetAtt": [
             "GraphqlApi1B6CF24C",
             "ApiId",
           ],
@@ -24,20 +24,20 @@ Object {
       },
       "Type": "AWS::AppSync::DataSource",
     },
-    "GraphqlApi1B6CF24C": Object {
-      "Properties": Object {
+    "GraphqlApi1B6CF24C": {
+      "Properties": {
         "AuthenticationType": "API_KEY",
         "Name": "STUB",
       },
       "Type": "AWS::AppSync::GraphQLApi",
     },
-    "GraphqlApiDefaultApiKey47EE7128": Object {
-      "DependsOn": Array [
+    "GraphqlApiDefaultApiKey47EE7128": {
+      "DependsOn": [
         "GraphqlApiSchema1B71CE4F",
       ],
-      "Properties": Object {
-        "ApiId": Object {
-          "Fn::GetAtt": Array [
+      "Properties": {
+        "ApiId": {
+          "Fn::GetAtt": [
             "GraphqlApi1B6CF24C",
             "ApiId",
           ],
@@ -45,14 +45,14 @@ Object {
       },
       "Type": "AWS::AppSync::ApiKey",
     },
-    "GraphqlApiQueryartistResolver7140AC46": Object {
-      "DependsOn": Array [
+    "GraphqlApiQueryartistResolver7140AC46": {
+      "DependsOn": [
         "ApiSchemaAndResolversStubDataSourceD27C846A",
         "GraphqlApiSchema1B71CE4F",
       ],
-      "Properties": Object {
-        "ApiId": Object {
-          "Fn::GetAtt": Array [
+      "Properties": {
+        "ApiId": {
+          "Fn::GetAtt": [
             "GraphqlApi1B6CF24C",
             "ApiId",
           ],
@@ -80,10 +80,10 @@ Object {
       },
       "Type": "AWS::AppSync::Resolver",
     },
-    "GraphqlApiSchema1B71CE4F": Object {
-      "Properties": Object {
-        "ApiId": Object {
-          "Fn::GetAtt": Array [
+    "GraphqlApiSchema1B71CE4F": {
+      "Properties": {
+        "ApiId": {
+          "Fn::GetAtt": [
             "GraphqlApi1B6CF24C",
             "ApiId",
           ],
@@ -138,22 +138,22 @@ type Query {
       "Type": "AWS::AppSync::GraphQLSchema",
     },
   },
-  "Rules": Object {
-    "CheckBootstrapVersion": Object {
-      "Assertions": Array [
-        Object {
-          "Assert": Object {
-            "Fn::Not": Array [
-              Object {
-                "Fn::Contains": Array [
-                  Array [
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
                     "1",
                     "2",
                     "3",
                     "4",
                     "5",
                   ],
-                  Object {
+                  {
                     "Ref": "BootstrapVersion",
                   },
                 ],

@@ -18,5 +18,7 @@
   "appName": "cobra.events",
   "domain": "cobra.events",
   "githubOwner": "seanWLawrence",
-  "apiCertificateArn": "arn:aws:acm:us-east-1:512083878312:certificate/c5bfd2ac-f259-4c4f-8d42-34ae425777f2"
+  "apiCertificateArn": "arn:aws:acm:us-east-1:512083878312:certificate/c5bfd2ac-f259-4c4f-8d42-34ae425777f2",
+  "iamChangesNotificationEmail": "sean@sean-lawrence.com",
+  "codestarConnectionArn": "arn:aws:codestar-connections:us-east-1:111111:connection/xxxx-xxxx-xxxx-xxxx"
 }

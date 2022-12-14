@@ -1,20 +1,20 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
+// Vitest Snapshot v1
 
 exports[`matches snapshot 1`] = `
-Object {
-  "Parameters": Object {
-    "BootstrapVersion": Object {
+{
+  "Parameters": {
+    "BootstrapVersion": {
       "Default": "/cdk-bootstrap/hnb659fds/version",
       "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
       "Type": "AWS::SSM::Parameter::Value<String>",
     },
   },
-  "Resources": Object {
-    "ApiApiSchemaAndResolversStubDataSourceAEB8B4CD": Object {
-      "Properties": Object {
-        "ApiId": Object {
-          "Fn::GetAtt": Array [
-            "ApiGraphQLApiAEA06692",
+  "Resources": {
+    "ApiSchemaAndResolversStubDataSourceD27C846A": {
+      "Properties": {
+        "ApiId": {
+          "Fn::GetAtt": [
+            "GraphQLApi6F81E747",
             "ApiId",
           ],
         },
@@ -24,26 +24,13 @@ Object {
       },
       "Type": "AWS::AppSync::DataSource",
     },
-    "ApiCertificate285C31EB": Object {
-      "Properties": Object {
-        "DomainName": "cobra.events",
-        "Tags": Array [
-          Object {
-            "Key": "Name",
-            "Value": "StubStack/Api/Certificate",
-          },
-        ],
-        "ValidationMethod": "DNS",
-      },
-      "Type": "AWS::CertificateManager::Certificate",
-    },
-    "ApiGraphQLApiAEA06692": Object {
-      "Properties": Object {
+    "GraphQLApi6F81E747": {
+      "Properties": {
         "AuthenticationType": "AWS_IAM",
-        "LogConfig": Object {
-          "CloudWatchLogsRoleArn": Object {
-            "Fn::GetAtt": Array [
-              "ApiGraphQLApiApiLogsRole3D0FF3EE",
+        "LogConfig": {
+          "CloudWatchLogsRoleArn": {
+            "Fn::GetAtt": [
+              "GraphQLApiApiLogsRoleA56C304B",
               "Arn",
             ],
           },
@@ -55,27 +42,27 @@ Object {
       },
       "Type": "AWS::AppSync::GraphQLApi",
     },
-    "ApiGraphQLApiApiLogsRole3D0FF3EE": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "GraphQLApiApiLogsRoleA56C304B": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "appsync.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/service-role/AWSAppSyncPushToCloudWatchLogs",
@@ -86,14 +73,14 @@ Object {
       },
       "Type": "AWS::IAM::Role",
     },
-    "ApiGraphQLApiDomainAssociation235EB3D8": Object {
-      "DependsOn": Array [
-        "ApiGraphQLApiDomainNameCAE94496",
+    "GraphQLApiDomainAssociationE2FC66E2": {
+      "DependsOn": [
+        "GraphQLApiDomainName60CF48F3",
       ],
-      "Properties": Object {
-        "ApiId": Object {
-          "Fn::GetAtt": Array [
-            "ApiGraphQLApiAEA06692",
+      "Properties": {
+        "ApiId": {
+          "Fn::GetAtt": [
+            "GraphQLApi6F81E747",
             "ApiId",
           ],
         },
@@ -101,19 +88,17 @@ Object {
       },
       "Type": "AWS::AppSync::DomainNameApiAssociation",
     },
-    "ApiGraphQLApiDomainNameCAE94496": Object {
-      "Properties": Object {
-        "CertificateArn": Object {
-          "Ref": "ApiCertificate285C31EB",
-        },
-        "Description": Object {
-          "Fn::Join": Array [
+    "GraphQLApiDomainName60CF48F3": {
+      "Properties": {
+        "CertificateArn": "arn:aws:acm:us-east-1:512083878312:certificate/c5bfd2ac-f259-4c4f-8d42-34ae425777f2",
+        "Description": {
+          "Fn::Join": [
             "",
-            Array [
+            [
               "domain for cobra.events at ",
-              Object {
-                "Fn::GetAtt": Array [
-                  "ApiGraphQLApiAEA06692",
+              {
+                "Fn::GetAtt": [
+                  "GraphQLApi6F81E747",
                   "GraphQLUrl",
                 ],
               },
@@ -124,16 +109,16 @@ Object {
       },
       "Type": "AWS::AppSync::DomainName",
     },
-    "ApiGraphQLApiLogRetention7A6597AE": Object {
-      "Properties": Object {
-        "LogGroupName": Object {
-          "Fn::Join": Array [
+    "GraphQLApiLogRetention061E0399": {
+      "Properties": {
+        "LogGroupName": {
+          "Fn::Join": [
             "",
-            Array [
+            [
               "/aws/appsync/apis/",
-              Object {
-                "Fn::GetAtt": Array [
-                  "ApiGraphQLApiAEA06692",
+              {
+                "Fn::GetAtt": [
+                  "GraphQLApi6F81E747",
                   "ApiId",
                 ],
               },
@@ -141,8 +126,8 @@ Object {
           ],
         },
         "RetentionInDays": 30,
-        "ServiceToken": Object {
-          "Fn::GetAtt": Array [
+        "ServiceToken": {
+          "Fn::GetAtt": [
             "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A",
             "Arn",
           ],
@@ -150,15 +135,15 @@ Object {
       },
       "Type": "Custom::LogRetention",
     },
-    "ApiGraphQLApiQueryartistResolver80E20D35": Object {
-      "DependsOn": Array [
-        "ApiApiSchemaAndResolversStubDataSourceAEB8B4CD",
-        "ApiGraphQLApiSchema54725A92",
+    "GraphQLApiQueryartistResolverA2BF4F02": {
+      "DependsOn": [
+        "ApiSchemaAndResolversStubDataSourceD27C846A",
+        "GraphQLApiSchema5937B126",
       ],
-      "Properties": Object {
-        "ApiId": Object {
-          "Fn::GetAtt": Array [
-            "ApiGraphQLApiAEA06692",
+      "Properties": {
+        "ApiId": {
+          "Fn::GetAtt": [
+            "GraphQLApi6F81E747",
             "ApiId",
           ],
         },
@@ -185,11 +170,11 @@ Object {
       },
       "Type": "AWS::AppSync::Resolver",
     },
-    "ApiGraphQLApiSchema54725A92": Object {
-      "Properties": Object {
-        "ApiId": Object {
-          "Fn::GetAtt": Array [
-            "ApiGraphQLApiAEA06692",
+    "GraphQLApiSchema5937B126": {
+      "Properties": {
+        "ApiId": {
+          "Fn::GetAtt": [
+            "GraphQLApi6F81E747",
             "ApiId",
           ],
         },
@@ -242,21 +227,21 @@ type Query {
       },
       "Type": "AWS::AppSync::GraphQLSchema",
     },
-    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": Object {
-      "DependsOn": Array [
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aFD4BFC8A": {
+      "DependsOn": [
         "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
         "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
       ],
-      "Properties": Object {
-        "Code": Object {
-          "S3Bucket": Object {
+      "Properties": {
+        "Code": {
+          "S3Bucket": {
             "Fn::Sub": "cdk-hnb659fds-assets-\${AWS::AccountId}-\${AWS::Region}",
           },
           "S3Key": "eb5b005c858404ea0c8f68098ed5dcdf5340e02461f149751d10f59c210d5ef8.zip",
         },
         "Handler": "index.handler",
-        "Role": Object {
-          "Fn::GetAtt": Array [
+        "Role": {
+          "Fn::GetAtt": [
             "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
             "Arn",
           ],
@@ -265,27 +250,27 @@ type Query {
       },
       "Type": "AWS::Lambda::Function",
     },
-    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": Object {
-      "Properties": Object {
-        "AssumeRolePolicyDocument": Object {
-          "Statement": Array [
-            Object {
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
               "Action": "sts:AssumeRole",
               "Effect": "Allow",
-              "Principal": Object {
+              "Principal": {
                 "Service": "lambda.amazonaws.com",
               },
             },
           ],
           "Version": "2012-10-17",
         },
-        "ManagedPolicyArns": Array [
-          Object {
-            "Fn::Join": Array [
+        "ManagedPolicyArns": [
+          {
+            "Fn::Join": [
               "",
-              Array [
+              [
                 "arn:",
-                Object {
+                {
                   "Ref": "AWS::Partition",
                 },
                 ":iam::aws:policy/service-role/AWSLambdaBasicExecutionRole",
@@ -296,12 +281,12 @@ type Query {
       },
       "Type": "AWS::IAM::Role",
     },
-    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": Object {
-      "Properties": Object {
-        "PolicyDocument": Object {
-          "Statement": Array [
-            Object {
-              "Action": Array [
+    "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB": {
+      "Properties": {
+        "PolicyDocument": {
+          "Statement": [
+            {
+              "Action": [
                 "logs:DeleteRetentionPolicy",
                 "logs:PutRetentionPolicy",
               ],
@@ -312,8 +297,8 @@ type Query {
           "Version": "2012-10-17",
         },
         "PolicyName": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRoleDefaultPolicyADDA7DEB",
-        "Roles": Array [
-          Object {
+        "Roles": [
+          {
             "Ref": "LogRetentionaae0aa3c5b4d4f87b02d85b201efdd8aServiceRole9741ECFB",
           },
         ],
@@ -321,22 +306,22 @@ type Query {
       "Type": "AWS::IAM::Policy",
     },
   },
-  "Rules": Object {
-    "CheckBootstrapVersion": Object {
-      "Assertions": Array [
-        Object {
-          "Assert": Object {
-            "Fn::Not": Array [
-              Object {
-                "Fn::Contains": Array [
-                  Array [
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
                     "1",
                     "2",
                     "3",
                     "4",
                     "5",
                   ],
-                  Object {
+                  {
                     "Ref": "BootstrapVersion",
                   },
                 ],

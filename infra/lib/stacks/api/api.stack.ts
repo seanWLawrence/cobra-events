@@ -1,18 +1,19 @@
+import * as cdk from "aws-cdk-lib";
 import * as logs from "aws-cdk-lib/aws-logs";
 import * as certificateManager from "aws-cdk-lib/aws-certificatemanager";
 import * as appsync from "@aws-cdk/aws-appsync-alpha";
 import { Construct } from "constructs";
 
-import * as constants from "../constants";
-import * as internalConstructs from "./internal/index.construct";
+import * as constants from "../../constants";
+import { ApiSchemaAndResolvers } from "./api-schema-and-resolvers.construct";
 
-export interface ApiProps {}
+export interface ApiProps extends cdk.StackProps {}
 
-export class Api extends Construct {
+export class Api extends cdk.Stack {
   public readonly graphqlApi: appsync.GraphqlApi;
 
   constructor(scope: Construct, id: string, props: ApiProps = {}) {
-    super(scope, id);
+    super(scope, id, props);
 
     this.graphqlApi = new appsync.GraphqlApi(this, "GraphQLApi", {
       name: this.node.tryGetContext(constants.context.appName),
@@ -37,10 +38,8 @@ export class Api extends Construct {
       xrayEnabled: false,
     });
 
-    new internalConstructs.ApiSchemaAndResolvers(
-      this,
-      "ApiSchemaAndResolvers",
-      { graphqlApi: this.graphqlApi }
-    );
+    new ApiSchemaAndResolvers(this, "ApiSchemaAndResolvers", {
+      graphqlApi: this.graphqlApi,
+    });
   }
 }

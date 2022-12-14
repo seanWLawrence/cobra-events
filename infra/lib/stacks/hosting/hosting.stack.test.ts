@@ -1,15 +1,13 @@
-import * as cdk from "aws-cdk-lib";
 import * as assertions from "aws-cdk-lib/assertions";
-import * as constants from "../../lib/constants";
-import * as constructs from "../../lib/constructs/index.construct";
-import * as utils from "../utils";
+import * as constants from "../../constants";
+import { Hosting } from "./hosting.stack";
+import * as utils from "../../test-utils";
+
+const { template, stack } = utils.synthStack(
+  (scope) => new Hosting(scope, "Hosting", {})
+);
 
 test("creates Amplify app", () => {
-  const stack = utils.stubStack((scope) => {
-    new constructs.Hosting(scope, "Hosting", {});
-  });
-  const template = assertions.Template.fromStack(stack);
-
   template.hasResourceProperties("AWS::Amplify::App", {
     Name: stack.node.tryGetContext(constants.context.appName),
     Repository: assertions.Match.anyValue(),
@@ -18,14 +16,12 @@ test("creates Amplify app", () => {
 
   template.hasResourceProperties("AWS::Amplify::Branch", {
     BranchName: "main",
-    EnableAutoBuild: true,
-    EnablePullRequestPreview: true,
+    EnableAutoBuild: false,
   });
 
   template.hasResourceProperties("AWS::Amplify::Branch", {
     BranchName: "dev",
-    EnableAutoBuild: true,
-    EnablePullRequestPreview: true,
+    EnableAutoBuild: false,
   });
 
   template.hasResourceProperties("AWS::Amplify::Domain", {
@@ -41,11 +37,5 @@ test("creates Amplify app", () => {
 });
 
 test("matches snapshot", () => {
-  const stack = utils.stubStack((scope) => {
-    new constructs.Hosting(scope, "Hosting", {});
-  });
-
-  const template = assertions.Template.fromStack(stack);
-
   expect(template.toJSON()).toMatchSnapshot();
 });

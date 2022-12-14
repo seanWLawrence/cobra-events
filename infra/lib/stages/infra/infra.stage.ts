@@ -1,21 +1,23 @@
 import * as cdk from "aws-cdk-lib";
-import invariant from "tiny-invariant";
 import { Construct } from "constructs";
+import invariant from "tiny-invariant";
+import * as constants from "../../constants";
+import * as stacks from "../../stacks/index.stack";
 
-import * as constructs from "../constructs/index.construct";
-import * as constants from "../constants";
+interface InfraProps extends cdk.StageProps {}
 
-interface InfraStackProps extends cdk.StackProps {}
+export class Infra extends cdk.Stage {
+  public readonly amplifyAppIdOutput: cdk.CfnOutput;
 
-export class InfraStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props: InfraStackProps = {}) {
+  constructor(scope: Construct, id: string, props: InfraProps = {}) {
     super(scope, id, props);
 
     this.assertContextValuesExist();
 
-    new constructs.Hosting(this, "Hosting", {});
+    const { amplifyAppIdOutput } = new stacks.Hosting(this, "Hosting", {});
+    this.amplifyAppIdOutput = amplifyAppIdOutput;
 
-    new constructs.Api(this, "Api", {});
+    new stacks.Api(this, "Api", {});
   }
 
   /**

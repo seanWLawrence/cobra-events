@@ -3,19 +3,25 @@ import * as amplify from "@aws-cdk/aws-amplify-alpha";
 import * as codeBuild from "aws-cdk-lib/aws-codebuild";
 import { Construct } from "constructs";
 
-import * as constants from "../constants";
+import * as constants from "../../constants";
 
-export interface HostingProps {}
+export interface HostingProps extends cdk.StackProps {}
 
-export class Hosting extends Construct {
+export class Hosting extends cdk.Stack {
   public readonly amplifyApp: amplify.App;
+  public readonly amplifyAppIdOutput: cdk.CfnOutput;
 
   constructor(scope: Construct, id: string, props: HostingProps = {}) {
-    super(scope, id);
+    super(scope, id, props);
 
     this.amplifyApp = new amplify.App(this, "AmplifyApp", {
       appName: this.node.tryGetContext(constants.context.appName),
       environmentVariables: { AMPLIFY_MONOREPO_APP_ROOT: "app" },
+      sourceCodeProvider: new amplify.GitHubSourceCodeProvider({
+        owner: this.node.tryGetContext(constants.context.githubOwner),
+        oauthToken: cdk.SecretValue.secretsManager("github-token"),
+        repository: this.node.tryGetContext(constants.context.appName),
+      }),
       buildSpec: codeBuild.BuildSpec.fromObjectToYaml({
         version: "1.0",
         applications: [
@@ -47,11 +53,16 @@ export class Hosting extends Construct {
       }),
     });
 
-    const dev = this.amplifyApp.addBranch("dev", {
-      // basicAuth: amplify.BasicAuth.fromGeneratedPassword("admin"),
+    this.amplifyAppIdOutput = new cdk.CfnOutput(this, "AmplifyAppIdOutput", {
+      value: this.amplifyApp.appId,
     });
 
-    const main = this.amplifyApp.addBranch("main");
+    const dev = this.amplifyApp.addBranch("dev", {
+      // basicAuth: amplify.BasicAuth.fromGeneratedPassword("admin"),
+      autoBuild: false,
+    });
+
+    const main = this.amplifyApp.addBranch("main", { autoBuild: false });
 
     const domain = this.amplifyApp.addDomain(
       this.node.tryGetContext(constants.context.domain),

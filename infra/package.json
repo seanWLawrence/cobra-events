@@ -2,14 +2,14 @@
   "name": "infra",
   "version": "0.1.0",
   "bin": {
-    "infra": "bin/infra.js"
+    "infra": "bin/deploy.js"
   },
   "scripts": {
     "build": "tsc",
-    "watch": "tsc -w",
     "test": "vitest",
-    "cdk": "cdk",
-    "coverage": "vitest run --coverage"
+    "test:ci": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "cdk": "cdk"
   },
   "devDependencies": {
     "@types/jest": "^29.2.4",

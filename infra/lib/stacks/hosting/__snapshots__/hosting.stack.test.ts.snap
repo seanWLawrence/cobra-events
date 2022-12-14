@@ -1,0 +1,191 @@
+// Vitest Snapshot v1
+
+exports[`matches snapshot 1`] = `
+{
+  "Outputs": {
+    "AmplifyAppIdOutput": {
+      "Value": {
+        "Fn::GetAtt": [
+          "AmplifyApp6046A70F",
+          "AppId",
+        ],
+      },
+    },
+  },
+  "Parameters": {
+    "BootstrapVersion": {
+      "Default": "/cdk-bootstrap/hnb659fds/version",
+      "Description": "Version of the CDK Bootstrap resources in this environment, automatically retrieved from SSM Parameter Store. [cdk:skip]",
+      "Type": "AWS::SSM::Parameter::Value<String>",
+    },
+  },
+  "Resources": {
+    "AmplifyApp6046A70F": {
+      "Properties": {
+        "BasicAuthConfig": {
+          "EnableBasicAuth": false,
+        },
+        "BuildSpec": "version: \\"1.0\\"
+applications:
+  - appRoot: app
+    frontend:
+      phases:
+        preBuild:
+          commands:
+            - npm ci
+        build:
+          commands:
+            - npm run build
+      artifacts:
+        baseDirectory: .next
+        files:
+          - \\"**/*\\"
+      cache:
+        paths:
+          - node_modules/**/*
+          - .next/cache/**/*
+",
+        "EnvironmentVariables": [
+          {
+            "Name": "AMPLIFY_MONOREPO_APP_ROOT",
+            "Value": "app",
+          },
+        ],
+        "IAMServiceRole": {
+          "Fn::GetAtt": [
+            "AmplifyAppRole0364E92A",
+            "Arn",
+          ],
+        },
+        "Name": "cobra.events",
+        "OauthToken": "{{resolve:secretsmanager:github-token:SecretString:::}}",
+        "Repository": "https://github.com/seanWLawrence/cobra.events",
+      },
+      "Type": "AWS::Amplify::App",
+    },
+    "AmplifyAppRole0364E92A": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "Service": "amplify.amazonaws.com",
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "AmplifyAppcobraeventsC6273BC8": {
+      "Properties": {
+        "AppId": {
+          "Fn::GetAtt": [
+            "AmplifyApp6046A70F",
+            "AppId",
+          ],
+        },
+        "AutoSubDomainCreationPatterns": [
+          "dev",
+        ],
+        "AutoSubDomainIAMRole": {
+          "Fn::GetAtt": [
+            "AmplifyAppRole0364E92A",
+            "Arn",
+          ],
+        },
+        "DomainName": "cobra.events",
+        "EnableAutoSubDomain": true,
+        "SubDomainSettings": [
+          {
+            "BranchName": {
+              "Fn::GetAtt": [
+                "AmplifyAppmainB68AA376",
+                "BranchName",
+              ],
+            },
+            "Prefix": "",
+          },
+          {
+            "BranchName": {
+              "Fn::GetAtt": [
+                "AmplifyAppmainB68AA376",
+                "BranchName",
+              ],
+            },
+            "Prefix": "www",
+          },
+          {
+            "BranchName": {
+              "Fn::GetAtt": [
+                "AmplifyAppdevB1AA9442",
+                "BranchName",
+              ],
+            },
+            "Prefix": "dev",
+          },
+        ],
+      },
+      "Type": "AWS::Amplify::Domain",
+    },
+    "AmplifyAppdevB1AA9442": {
+      "Properties": {
+        "AppId": {
+          "Fn::GetAtt": [
+            "AmplifyApp6046A70F",
+            "AppId",
+          ],
+        },
+        "BranchName": "dev",
+        "EnableAutoBuild": false,
+        "EnablePullRequestPreview": true,
+      },
+      "Type": "AWS::Amplify::Branch",
+    },
+    "AmplifyAppmainB68AA376": {
+      "Properties": {
+        "AppId": {
+          "Fn::GetAtt": [
+            "AmplifyApp6046A70F",
+            "AppId",
+          ],
+        },
+        "BranchName": "main",
+        "EnableAutoBuild": false,
+        "EnablePullRequestPreview": true,
+      },
+      "Type": "AWS::Amplify::Branch",
+    },
+  },
+  "Rules": {
+    "CheckBootstrapVersion": {
+      "Assertions": [
+        {
+          "Assert": {
+            "Fn::Not": [
+              {
+                "Fn::Contains": [
+                  [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5",
+                  ],
+                  {
+                    "Ref": "BootstrapVersion",
+                  },
+                ],
+              },
+            ],
+          },
+          "AssertDescription": "CDK bootstrap stack version 6 required. Please run 'cdk bootstrap' with a recent version of the CDK CLI.",
+        },
+      ],
+    },
+  },
+}
+`;

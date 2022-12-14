@@ -18,5 +18,7 @@
   "appName": "My app",
   "domain": "example.com",
   "githubOwner": "myGithubUsername",
-  "apiCertificateArn": "apiCertificateArn"
+  "apiCertificateArn": "apiCertificateArn",
+  "iamChangesNotificationEmail": "jane@example.com",
+  "codestarConnectionArn": "arn:aws:codestar-connections:us-east-1:11111111111:connection/xxxxxx-xxxxxxx-xxxxxxx"
 }
