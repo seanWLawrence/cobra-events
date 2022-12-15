@@ -12,10 +12,10 @@ test("creates AppSync GraphQL Api", () => {
     Name: stack.node.tryGetContext(constants.context.appName),
     AuthenticationType: "AWS_IAM",
     XrayEnabled: false,
-    LogConfig: assertions.Match.objectLike({
+    LogConfig: {
       ExcludeVerboseContent: true,
       FieldLogLevel: "ERROR",
-    }),
+    },
   });
 
   template.hasResourceProperties("Custom::LogRetention", {

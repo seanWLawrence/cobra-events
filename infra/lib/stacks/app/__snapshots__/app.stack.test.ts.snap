@@ -379,7 +379,7 @@ exports[`matches snapshot 1`] = `
     },
     \\"build\\": {
       \\"commands\\": [
-        \\"npm test:ci\\",
+        \\"npm run test:ci\\",
         \\"npx cdk synth\\"
       ]
     }
@@ -703,7 +703,7 @@ exports[`matches snapshot 1`] = `
                   "Version": "1",
                 },
                 "Configuration": {
-                  "EnvironmentVariables": "[{\\"name\\":\\"_PROJECT_CONFIG_HASH\\",\\"type\\":\\"PLAINTEXT\\",\\"value\\":\\"08cf8f52f262dd960aa0806ddd9c76f7a364edbcbe3357c19f999bb82f20fbcc\\"}]",
+                  "EnvironmentVariables": "[{\\"name\\":\\"_PROJECT_CONFIG_HASH\\",\\"type\\":\\"PLAINTEXT\\",\\"value\\":\\"bee5ebc8303e9397da0df40fc8bbbe1c70ea4b143adc86fef031bf4759fda1d8\\"}]",
                   "ProjectName": {
                     "Ref": "DevPipelineBuildSynthCdkBuildProject0EE8D5B1",
                   },
@@ -956,6 +956,74 @@ exports[`matches snapshot 1`] = `
                       ],
                     ],
                   },
+                  "StackName": "Infra-Budgets",
+                  "TemplatePath": "Synth_Output::assembly-App-Dev-Infra/AppDevInfraBudgetsC6CEC7AE.template.json",
+                },
+                "InputArtifacts": [
+                  {
+                    "Name": "Synth_Output",
+                  },
+                ],
+                "Name": "Budgets.Prepare",
+                "RoleArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":role/cdk-hnb659fds-deploy-role-",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      "-",
+                      {
+                        "Ref": "AWS::Region",
+                      },
+                    ],
+                  ],
+                },
+                "RunOrder": 3,
+              },
+              {
+                "ActionTypeId": {
+                  "Category": "Deploy",
+                  "Owner": "AWS",
+                  "Provider": "CloudFormation",
+                  "Version": "1",
+                },
+                "Configuration": {
+                  "ActionMode": "CHANGE_SET_REPLACE",
+                  "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+                  "ChangeSetName": "PipelineChange",
+                  "RoleArn": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":iam::",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":role/cdk-hnb659fds-cfn-exec-role-",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        "-",
+                        {
+                          "Ref": "AWS::Region",
+                        },
+                      ],
+                    ],
+                  },
                   "StackName": "Infra-Hosting",
                   "TemplatePath": "Synth_Output::assembly-App-Dev-Infra/AppDevInfraHosting98F76C7D.template.json",
                 },
@@ -1003,6 +1071,44 @@ exports[`matches snapshot 1`] = `
                   "StackName": "Infra-Api",
                 },
                 "Name": "Api.Deploy",
+                "RoleArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":role/cdk-hnb659fds-deploy-role-",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      "-",
+                      {
+                        "Ref": "AWS::Region",
+                      },
+                    ],
+                  ],
+                },
+                "RunOrder": 4,
+              },
+              {
+                "ActionTypeId": {
+                  "Category": "Deploy",
+                  "Owner": "AWS",
+                  "Provider": "CloudFormation",
+                  "Version": "1",
+                },
+                "Configuration": {
+                  "ActionMode": "CHANGE_SET_EXECUTE",
+                  "ChangeSetName": "PipelineChange",
+                  "StackName": "Infra-Budgets",
+                },
+                "Name": "Budgets.Deploy",
                 "RoleArn": {
                   "Fn::Join": [
                     "",
@@ -2576,7 +2682,7 @@ exports[`matches snapshot 1`] = `
     },
     \\"build\\": {
       \\"commands\\": [
-        \\"npm test:ci\\",
+        \\"npm run test:ci\\",
         \\"npx cdk synth\\"
       ]
     }
@@ -2813,7 +2919,7 @@ exports[`matches snapshot 1`] = `
                   "Version": "1",
                 },
                 "Configuration": {
-                  "EnvironmentVariables": "[{\\"name\\":\\"_PROJECT_CONFIG_HASH\\",\\"type\\":\\"PLAINTEXT\\",\\"value\\":\\"08cf8f52f262dd960aa0806ddd9c76f7a364edbcbe3357c19f999bb82f20fbcc\\"}]",
+                  "EnvironmentVariables": "[{\\"name\\":\\"_PROJECT_CONFIG_HASH\\",\\"type\\":\\"PLAINTEXT\\",\\"value\\":\\"bee5ebc8303e9397da0df40fc8bbbe1c70ea4b143adc86fef031bf4759fda1d8\\"}]",
                   "ProjectName": {
                     "Ref": "ProdPipelineBuildSynthCdkBuildProjectAF9324C7",
                   },
@@ -3066,6 +3172,74 @@ exports[`matches snapshot 1`] = `
                       ],
                     ],
                   },
+                  "StackName": "Infra-Budgets",
+                  "TemplatePath": "Synth_Output::assembly-App-Prod-Infra/AppProdInfraBudgetsFEE55148.template.json",
+                },
+                "InputArtifacts": [
+                  {
+                    "Name": "Synth_Output",
+                  },
+                ],
+                "Name": "Budgets.Prepare",
+                "RoleArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":role/cdk-hnb659fds-deploy-role-",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      "-",
+                      {
+                        "Ref": "AWS::Region",
+                      },
+                    ],
+                  ],
+                },
+                "RunOrder": 3,
+              },
+              {
+                "ActionTypeId": {
+                  "Category": "Deploy",
+                  "Owner": "AWS",
+                  "Provider": "CloudFormation",
+                  "Version": "1",
+                },
+                "Configuration": {
+                  "ActionMode": "CHANGE_SET_REPLACE",
+                  "Capabilities": "CAPABILITY_NAMED_IAM,CAPABILITY_AUTO_EXPAND",
+                  "ChangeSetName": "PipelineChange",
+                  "RoleArn": {
+                    "Fn::Join": [
+                      "",
+                      [
+                        "arn:",
+                        {
+                          "Ref": "AWS::Partition",
+                        },
+                        ":iam::",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        ":role/cdk-hnb659fds-cfn-exec-role-",
+                        {
+                          "Ref": "AWS::AccountId",
+                        },
+                        "-",
+                        {
+                          "Ref": "AWS::Region",
+                        },
+                      ],
+                    ],
+                  },
                   "StackName": "Infra-Hosting",
                   "TemplatePath": "Synth_Output::assembly-App-Prod-Infra/AppProdInfraHostingAB431A2C.template.json",
                 },
@@ -3113,6 +3287,44 @@ exports[`matches snapshot 1`] = `
                   "StackName": "Infra-Api",
                 },
                 "Name": "Api.Deploy",
+                "RoleArn": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":role/cdk-hnb659fds-deploy-role-",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      "-",
+                      {
+                        "Ref": "AWS::Region",
+                      },
+                    ],
+                  ],
+                },
+                "RunOrder": 4,
+              },
+              {
+                "ActionTypeId": {
+                  "Category": "Deploy",
+                  "Owner": "AWS",
+                  "Provider": "CloudFormation",
+                  "Version": "1",
+                },
+                "Configuration": {
+                  "ActionMode": "CHANGE_SET_EXECUTE",
+                  "ChangeSetName": "PipelineChange",
+                  "StackName": "Infra-Budgets",
+                },
+                "Name": "Budgets.Deploy",
                 "RoleArn": {
                   "Fn::Join": [
                     "",

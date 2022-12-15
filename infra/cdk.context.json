@@ -19,6 +19,7 @@
   "domain": "cobra.events",
   "githubOwner": "seanWLawrence",
   "apiCertificateArn": "arn:aws:acm:us-east-1:512083878312:certificate/cdd3bb16-8b39-44e1-bdde-127912ff3479",
-  "iamChangesNotificationEmail": "sean@sean-lawrence.com",
-  "codestarConnectionArn": "arn:aws:codestar-connections:us-east-1:512083878312:connection/f5124a0c-201f-4297-bcca-c397f8c3dc0e"
+  "iamChangesNotificationEmails": ["sean@sean-lawrence.com"],
+  "codestarConnectionArn": "arn:aws:codestar-connections:us-east-1:512083878312:connection/f5124a0c-201f-4297-bcca-c397f8c3dc0e",
+  "budgetsNotificationEmails": ["sean@sean-lawrence.com"]
 }

@@ -5,8 +5,9 @@ export const context = {
   domain: "domain",
   githubOwner: "githubOwner",
   apiCertificateArn: "apiCertificateArn",
-  iamChangesNotificationEmail: "iamChangesNotificationEmail",
+  iamChangesNotificationEmails: "iamChangesNotificationEmails",
   codestarConnectionArn: "codestarConnectionArn",
+  budgetsNotificationEmails: "budgetsNotificationEmails",
 };
 
 export const branch: Record<types.Branch, types.Branch> = {

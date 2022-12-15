@@ -19,6 +19,7 @@
   "domain": "example.com",
   "githubOwner": "myGithubUsername",
   "apiCertificateArn": "apiCertificateArn",
-  "iamChangesNotificationEmail": "jane@example.com",
-  "codestarConnectionArn": "arn:aws:codestar-connections:us-east-1:11111111111:connection/xxxxxx-xxxxxxx-xxxxxxx"
+  "iamChangesNotificationEmails": ["jane@example.com"],
+  "codestarConnectionArn": "arn:aws:codestar-connections:us-east-1:11111111111:connection/xxxxxx-xxxxxxx-xxxxxxx",
+  "budgetsNotificationEmails": ["jane@example.com"]
 }

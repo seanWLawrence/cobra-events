@@ -42,11 +42,15 @@ export class Pipeline extends Construct {
     });
     const iamChangesTopic = new sns.Topic(this, "IamChanges");
 
-    iamChangesTopic.addSubscription(
-      new snsSubscriptions.EmailSubscription(
-        this.node.tryGetContext(constants.context.iamChangesNotificationEmail)
-      )
+    const emails: string[] = this.node.tryGetContext(
+      constants.context.iamChangesNotificationEmails
     );
+
+    emails.forEach((email) => {
+      iamChangesTopic.addSubscription(
+        new snsSubscriptions.EmailSubscription(email)
+      );
+    });
 
     pipeline.addStage(infraStage, {
       pre: [

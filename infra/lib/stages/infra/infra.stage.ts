@@ -21,6 +21,8 @@ export class Infra extends cdk.Stage {
     this.amplifyAppIdOutput = amplifyAppIdOutput;
 
     new stacks.Api(this, "Api", { branch: props.branch });
+
+    new stacks.Budgets(this, "Budgets");
   }
 
   /**
