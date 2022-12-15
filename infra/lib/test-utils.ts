@@ -2,7 +2,7 @@ import * as cdk from "aws-cdk-lib";
 import * as assertions from "aws-cdk-lib/assertions";
 import { Construct } from "constructs";
 
-import context from "../cdk.context.json";
+import context from "../cdk.context.example.json";
 
 export const getContext = () => {
   return context;
