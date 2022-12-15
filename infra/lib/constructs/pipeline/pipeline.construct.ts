@@ -32,7 +32,7 @@ export class Pipeline extends Construct {
       synth: new pipelines.ShellStep("Synth", {
         input,
         installCommands: ["cd infra", "npm ci"],
-        commands: ["npm test:ci", "npx cdk synth"],
+        commands: ["npm run test:ci", "npx cdk synth"],
         primaryOutputDirectory: "infra/cdk.out",
       }),
     });
