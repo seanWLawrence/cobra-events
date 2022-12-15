@@ -37,7 +37,9 @@ export class Pipeline extends Construct {
       }),
     });
 
-    const infraStage = new stages.Infra(this, "Infra", {});
+    const infraStage = new stages.Infra(this, "Infra", {
+      branch: props.branch,
+    });
     const iamChangesTopic = new sns.Topic(this, "IamChanges");
 
     iamChangesTopic.addSubscription(

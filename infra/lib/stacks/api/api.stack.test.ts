@@ -4,7 +4,7 @@ import { Api } from "./api.stack";
 import * as utils from "../../test-utils";
 
 const { template, stack } = utils.synthStack(
-  (scope) => new Api(scope, "Api", {})
+  (scope) => new Api(scope, "Api", { branch: constants.branch.main })
 );
 
 test("creates AppSync GraphQL Api", () => {
