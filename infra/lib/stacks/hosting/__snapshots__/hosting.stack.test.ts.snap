@@ -57,9 +57,9 @@ applications:
             "Arn",
           ],
         },
-        "Name": "cobra.events",
+        "Name": "My app",
         "OauthToken": "{{resolve:secretsmanager:github-token:SecretString:::}}",
-        "Repository": "https://github.com/seanWLawrence/cobra.events",
+        "Repository": "https://github.com/myGithubUsername/My app",
       },
       "Type": "AWS::Amplify::App",
     },
@@ -80,7 +80,21 @@ applications:
       },
       "Type": "AWS::IAM::Role",
     },
-    "AmplifyAppcobraeventsC6273BC8": {
+    "AmplifyAppdevB1AA9442": {
+      "Properties": {
+        "AppId": {
+          "Fn::GetAtt": [
+            "AmplifyApp6046A70F",
+            "AppId",
+          ],
+        },
+        "BranchName": "dev",
+        "EnableAutoBuild": false,
+        "EnablePullRequestPreview": true,
+      },
+      "Type": "AWS::Amplify::Branch",
+    },
+    "AmplifyAppexamplecomB7B461E0": {
       "Properties": {
         "AppId": {
           "Fn::GetAtt": [
@@ -97,7 +111,7 @@ applications:
             "Arn",
           ],
         },
-        "DomainName": "cobra.events",
+        "DomainName": "example.com",
         "EnableAutoSubDomain": true,
         "SubDomainSettings": [
           {
@@ -130,20 +144,6 @@ applications:
         ],
       },
       "Type": "AWS::Amplify::Domain",
-    },
-    "AmplifyAppdevB1AA9442": {
-      "Properties": {
-        "AppId": {
-          "Fn::GetAtt": [
-            "AmplifyApp6046A70F",
-            "AppId",
-          ],
-        },
-        "BranchName": "dev",
-        "EnableAutoBuild": false,
-        "EnablePullRequestPreview": true,
-      },
-      "Type": "AWS::Amplify::Branch",
     },
     "AmplifyAppmainB68AA376": {
       "Properties": {

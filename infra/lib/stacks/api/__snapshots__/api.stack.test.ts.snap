@@ -37,7 +37,7 @@ exports[`matches snapshot 1`] = `
           "ExcludeVerboseContent": true,
           "FieldLogLevel": "ERROR",
         },
-        "Name": "cobra.events",
+        "Name": "My app",
         "XrayEnabled": false,
       },
       "Type": "AWS::AppSync::GraphQLApi",
@@ -84,18 +84,18 @@ exports[`matches snapshot 1`] = `
             "ApiId",
           ],
         },
-        "DomainName": "api.cobra.events",
+        "DomainName": "main.api.example.com",
       },
       "Type": "AWS::AppSync::DomainNameApiAssociation",
     },
     "GraphQLApiDomainName60CF48F3": {
       "Properties": {
-        "CertificateArn": "arn:aws:acm:us-east-1:512083878312:certificate/c5bfd2ac-f259-4c4f-8d42-34ae425777f2",
+        "CertificateArn": "apiCertificateArn",
         "Description": {
           "Fn::Join": [
             "",
             [
-              "domain for cobra.events at ",
+              "domain for My app at ",
               {
                 "Fn::GetAtt": [
                   "GraphQLApi6F81E747",
@@ -105,7 +105,7 @@ exports[`matches snapshot 1`] = `
             ],
           ],
         },
-        "DomainName": "api.cobra.events",
+        "DomainName": "main.api.example.com",
       },
       "Type": "AWS::AppSync::DomainName",
     },

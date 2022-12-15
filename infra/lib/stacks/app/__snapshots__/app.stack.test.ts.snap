@@ -13,9 +13,9 @@ exports[`matches snapshot 1`] = `
     "DevIamChangesFA1A4BF9": {
       "Type": "AWS::SNS::Topic",
     },
-    "DevIamChangesseanseanlawrencecomF5612A4C": {
+    "DevIamChangesjaneexamplecom91F7F40D": {
       "Properties": {
-        "Endpoint": "sean@sean-lawrence.com",
+        "Endpoint": "jane@example.com",
         "Protocol": "email",
         "TopicArn": {
           "Ref": "DevIamChangesFA1A4BF9",
@@ -379,8 +379,7 @@ exports[`matches snapshot 1`] = `
     },
     \\"build\\": {
       \\"commands\\": [
-        \\"npm test\\",
-        \\"npm run build\\",
+        \\"npm test:ci\\",
         \\"npx cdk synth\\"
       ]
     }
@@ -674,18 +673,18 @@ exports[`matches snapshot 1`] = `
                 },
                 "Configuration": {
                   "BranchName": "dev",
-                  "ConnectionArn": "arn:aws:codestar-connections:us-east-1:111111:connection/xxxx-xxxx-xxxx-xxxx",
-                  "FullRepositoryId": "seanWLawrence/cobra.events",
+                  "ConnectionArn": "arn:aws:codestar-connections:us-east-1:11111111111:connection/xxxxxx-xxxxxxx-xxxxxxx",
+                  "FullRepositoryId": "myGithubUsername/My app",
                 },
-                "Name": "seanWLawrence_cobra.events",
+                "Name": "myGithubUsername_My_app",
                 "OutputArtifacts": [
                   {
-                    "Name": "seanWLawrence_cobra_events_Source",
+                    "Name": "myGithubUsername_My_app_Source",
                   },
                 ],
                 "RoleArn": {
                   "Fn::GetAtt": [
-                    "DevPipelineSourceseanWLawrencecobraeventsCodePipelineActionRoleB6961E03",
+                    "DevPipelineSourcemyGithubUsernameMyappCodePipelineActionRole29F6CF7D",
                     "Arn",
                   ],
                 },
@@ -704,14 +703,14 @@ exports[`matches snapshot 1`] = `
                   "Version": "1",
                 },
                 "Configuration": {
-                  "EnvironmentVariables": "[{\\"name\\":\\"_PROJECT_CONFIG_HASH\\",\\"type\\":\\"PLAINTEXT\\",\\"value\\":\\"3e27d01092df0e89f14bbd34c2286f9d747518f1cb81a911804188dbb9a499ea\\"}]",
+                  "EnvironmentVariables": "[{\\"name\\":\\"_PROJECT_CONFIG_HASH\\",\\"type\\":\\"PLAINTEXT\\",\\"value\\":\\"08cf8f52f262dd960aa0806ddd9c76f7a364edbcbe3357c19f999bb82f20fbcc\\"}]",
                   "ProjectName": {
                     "Ref": "DevPipelineBuildSynthCdkBuildProject0EE8D5B1",
                   },
                 },
                 "InputArtifacts": [
                   {
-                    "Name": "seanWLawrence_cobra_events_Source",
+                    "Name": "myGithubUsername_My_app_Source",
                   },
                 ],
                 "Name": "Synth",
@@ -1083,7 +1082,7 @@ exports[`matches snapshot 1`] = `
                 },
                 "InputArtifacts": [
                   {
-                    "Name": "seanWLawrence_cobra_events_Source",
+                    "Name": "myGithubUsername_My_app_Source",
                   },
                 ],
                 "Name": "DeployToAmplify",
@@ -1825,7 +1824,7 @@ exports[`matches snapshot 1`] = `
                 },
                 {
                   "Fn::GetAtt": [
-                    "DevPipelineSourceseanWLawrencecobraeventsCodePipelineActionRoleB6961E03",
+                    "DevPipelineSourcemyGithubUsernameMyappCodePipelineActionRole29F6CF7D",
                     "Arn",
                   ],
                 },
@@ -1866,7 +1865,7 @@ exports[`matches snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
-    "DevPipelineSourceseanWLawrencecobraeventsCodePipelineActionRoleB6961E03": {
+    "DevPipelineSourcemyGithubUsernameMyappCodePipelineActionRole29F6CF7D": {
       "Properties": {
         "AssumeRolePolicyDocument": {
           "Statement": [
@@ -1898,14 +1897,14 @@ exports[`matches snapshot 1`] = `
       },
       "Type": "AWS::IAM::Role",
     },
-    "DevPipelineSourceseanWLawrencecobraeventsCodePipelineActionRoleDefaultPolicyB86F2EE1": {
+    "DevPipelineSourcemyGithubUsernameMyappCodePipelineActionRoleDefaultPolicyC249E904": {
       "Properties": {
         "PolicyDocument": {
           "Statement": [
             {
               "Action": "codestar-connections:UseConnection",
               "Effect": "Allow",
-              "Resource": "arn:aws:codestar-connections:us-east-1:111111:connection/xxxx-xxxx-xxxx-xxxx",
+              "Resource": "arn:aws:codestar-connections:us-east-1:11111111111:connection/xxxxxx-xxxxxxx-xxxxxxx",
             },
             {
               "Action": [
@@ -1968,10 +1967,10 @@ exports[`matches snapshot 1`] = `
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "DevPipelineSourceseanWLawrencecobraeventsCodePipelineActionRoleDefaultPolicyB86F2EE1",
+        "PolicyName": "DevPipelineSourcemyGithubUsernameMyappCodePipelineActionRoleDefaultPolicyC249E904",
         "Roles": [
           {
-            "Ref": "DevPipelineSourceseanWLawrencecobraeventsCodePipelineActionRoleB6961E03",
+            "Ref": "DevPipelineSourcemyGithubUsernameMyappCodePipelineActionRole29F6CF7D",
           },
         ],
       },
@@ -2211,9 +2210,9 @@ exports[`matches snapshot 1`] = `
     "ProdIamChanges3A5B7B07": {
       "Type": "AWS::SNS::Topic",
     },
-    "ProdIamChangesseanseanlawrencecom8E577C00": {
+    "ProdIamChangesjaneexamplecom3D540C39": {
       "Properties": {
-        "Endpoint": "sean@sean-lawrence.com",
+        "Endpoint": "jane@example.com",
         "Protocol": "email",
         "TopicArn": {
           "Ref": "ProdIamChanges3A5B7B07",
@@ -2577,8 +2576,7 @@ exports[`matches snapshot 1`] = `
     },
     \\"build\\": {
       \\"commands\\": [
-        \\"npm test\\",
-        \\"npm run build\\",
+        \\"npm test:ci\\",
         \\"npx cdk synth\\"
       ]
     }
@@ -2785,18 +2783,18 @@ exports[`matches snapshot 1`] = `
                 },
                 "Configuration": {
                   "BranchName": "main",
-                  "ConnectionArn": "arn:aws:codestar-connections:us-east-1:111111:connection/xxxx-xxxx-xxxx-xxxx",
-                  "FullRepositoryId": "seanWLawrence/cobra.events",
+                  "ConnectionArn": "arn:aws:codestar-connections:us-east-1:11111111111:connection/xxxxxx-xxxxxxx-xxxxxxx",
+                  "FullRepositoryId": "myGithubUsername/My app",
                 },
-                "Name": "seanWLawrence_cobra.events",
+                "Name": "myGithubUsername_My_app",
                 "OutputArtifacts": [
                   {
-                    "Name": "seanWLawrence_cobra_events_Source",
+                    "Name": "myGithubUsername_My_app_Source",
                   },
                 ],
                 "RoleArn": {
                   "Fn::GetAtt": [
-                    "ProdPipelineSourceseanWLawrencecobraeventsCodePipelineActionRoleF2563D66",
+                    "ProdPipelineSourcemyGithubUsernameMyappCodePipelineActionRole28AD57AA",
                     "Arn",
                   ],
                 },
@@ -2815,14 +2813,14 @@ exports[`matches snapshot 1`] = `
                   "Version": "1",
                 },
                 "Configuration": {
-                  "EnvironmentVariables": "[{\\"name\\":\\"_PROJECT_CONFIG_HASH\\",\\"type\\":\\"PLAINTEXT\\",\\"value\\":\\"3e27d01092df0e89f14bbd34c2286f9d747518f1cb81a911804188dbb9a499ea\\"}]",
+                  "EnvironmentVariables": "[{\\"name\\":\\"_PROJECT_CONFIG_HASH\\",\\"type\\":\\"PLAINTEXT\\",\\"value\\":\\"08cf8f52f262dd960aa0806ddd9c76f7a364edbcbe3357c19f999bb82f20fbcc\\"}]",
                   "ProjectName": {
                     "Ref": "ProdPipelineBuildSynthCdkBuildProjectAF9324C7",
                   },
                 },
                 "InputArtifacts": [
                   {
-                    "Name": "seanWLawrence_cobra_events_Source",
+                    "Name": "myGithubUsername_My_app_Source",
                   },
                 ],
                 "Name": "Synth",
@@ -3194,7 +3192,7 @@ exports[`matches snapshot 1`] = `
                 },
                 "InputArtifacts": [
                   {
-                    "Name": "seanWLawrence_cobra_events_Source",
+                    "Name": "myGithubUsername_My_app_Source",
                   },
                 ],
                 "Name": "DeployToAmplify",
@@ -4023,7 +4021,7 @@ exports[`matches snapshot 1`] = `
                 },
                 {
                   "Fn::GetAtt": [
-                    "ProdPipelineSourceseanWLawrencecobraeventsCodePipelineActionRoleF2563D66",
+                    "ProdPipelineSourcemyGithubUsernameMyappCodePipelineActionRole28AD57AA",
                     "Arn",
                   ],
                 },
@@ -4064,14 +4062,46 @@ exports[`matches snapshot 1`] = `
       },
       "Type": "AWS::IAM::Policy",
     },
-    "ProdPipelineSourceseanWLawrencecobraeventsCodePipelineActionRoleDefaultPolicyE208CCEC": {
+    "ProdPipelineSourcemyGithubUsernameMyappCodePipelineActionRole28AD57AA": {
+      "Properties": {
+        "AssumeRolePolicyDocument": {
+          "Statement": [
+            {
+              "Action": "sts:AssumeRole",
+              "Effect": "Allow",
+              "Principal": {
+                "AWS": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition",
+                      },
+                      ":iam::",
+                      {
+                        "Ref": "AWS::AccountId",
+                      },
+                      ":root",
+                    ],
+                  ],
+                },
+              },
+            },
+          ],
+          "Version": "2012-10-17",
+        },
+      },
+      "Type": "AWS::IAM::Role",
+    },
+    "ProdPipelineSourcemyGithubUsernameMyappCodePipelineActionRoleDefaultPolicyB813D3B7": {
       "Properties": {
         "PolicyDocument": {
           "Statement": [
             {
               "Action": "codestar-connections:UseConnection",
               "Effect": "Allow",
-              "Resource": "arn:aws:codestar-connections:us-east-1:111111:connection/xxxx-xxxx-xxxx-xxxx",
+              "Resource": "arn:aws:codestar-connections:us-east-1:11111111111:connection/xxxxxx-xxxxxxx-xxxxxxx",
             },
             {
               "Action": [
@@ -4134,46 +4164,14 @@ exports[`matches snapshot 1`] = `
           ],
           "Version": "2012-10-17",
         },
-        "PolicyName": "ProdPipelineSourceseanWLawrencecobraeventsCodePipelineActionRoleDefaultPolicyE208CCEC",
+        "PolicyName": "ProdPipelineSourcemyGithubUsernameMyappCodePipelineActionRoleDefaultPolicyB813D3B7",
         "Roles": [
           {
-            "Ref": "ProdPipelineSourceseanWLawrencecobraeventsCodePipelineActionRoleF2563D66",
+            "Ref": "ProdPipelineSourcemyGithubUsernameMyappCodePipelineActionRole28AD57AA",
           },
         ],
       },
       "Type": "AWS::IAM::Policy",
-    },
-    "ProdPipelineSourceseanWLawrencecobraeventsCodePipelineActionRoleF2563D66": {
-      "Properties": {
-        "AssumeRolePolicyDocument": {
-          "Statement": [
-            {
-              "Action": "sts:AssumeRole",
-              "Effect": "Allow",
-              "Principal": {
-                "AWS": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition",
-                      },
-                      ":iam::",
-                      {
-                        "Ref": "AWS::AccountId",
-                      },
-                      ":root",
-                    ],
-                  ],
-                },
-              },
-            },
-          ],
-          "Version": "2012-10-17",
-        },
-      },
-      "Type": "AWS::IAM::Role",
     },
     "ProdPipelineUpdatePipelineSelfMutation958E2FEC": {
       "Properties": {
