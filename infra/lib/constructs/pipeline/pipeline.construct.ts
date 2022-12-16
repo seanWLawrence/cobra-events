@@ -1,4 +1,6 @@
+import * as cdk from "aws-cdk-lib";
 import * as pipelines from "aws-cdk-lib/pipelines";
+import * as iam from "aws-cdk-lib/aws-iam";
 import * as sns from "aws-cdk-lib/aws-sns";
 import * as snsSubscriptions from "aws-cdk-lib/aws-sns-subscriptions";
 import { Construct } from "constructs";
@@ -60,8 +62,23 @@ export class Pipeline extends Construct {
         }),
       ],
       post: [
-        new pipelines.ShellStep("DeployToAmplify", {
+        new pipelines.CodeBuildStep("DeployToAmplify", {
           input,
+          rolePolicyStatements: [
+            new iam.PolicyStatement({
+              actions: ["amplify:StartJob"],
+              effect: iam.Effect.ALLOW,
+              resources: [
+                cdk.Arn.format(
+                  {
+                    service: "amplify",
+                    resource: "apps/*/branches/dev/jobs/*",
+                  },
+                  cdk.Stack.of(this)
+                ),
+              ],
+            }),
+          ],
           envFromCfnOutputs: {
             AMPLIFY_APP_ID: infraStage.amplifyAppIdOutput,
           },

@@ -1365,6 +1365,30 @@ exports[`matches snapshot 1`] = `
               },
             },
             {
+              "Action": "amplify:StartJob",
+              "Effect": "Allow",
+              "Resource": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition",
+                    },
+                    ":amplify:",
+                    {
+                      "Ref": "AWS::Region",
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId",
+                    },
+                    ":apps/*/branches/dev/jobs/*",
+                  ],
+                ],
+              },
+            },
+            {
               "Action": [
                 "s3:GetBucket*",
                 "s3:GetObject*",
