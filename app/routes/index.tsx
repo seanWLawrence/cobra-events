@@ -3,9 +3,9 @@ import { json } from "@remix-run/cloudflare";
 import { useLoaderData } from "@remix-run/react";
 
 export const loader = async ({ context, params }: LoaderArgs) => {
-  // await context.app.put("host#test", "Heyooo", {
-  //   metadata: { hey: "something cool" },
-  // });
+  await context.app.put("host#test", "Heyooo", {
+    metadata: { hey: "something cool" },
+  });
 
   return json(await context.app.list({ prefix: "host" }));
 };
