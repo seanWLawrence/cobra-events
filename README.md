@@ -1,38 +1,54 @@
-# create-svelte
+# Cobra Events
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+> This project is a work in progress
 
-## Creating a project
+An open source event management system.
 
-If you're seeing this, you've probably already done this step. Congrats!
+## Tenets
 
-```bash
-# create a new project in the current directory
-npm create svelte@latest
+- No percentage-based or confusing fees for organizers or buyers
+- No option to resale for higher cost than originally paid
+- Accessibility and performance are top priorities
+- Configurable and simple to deploy
 
-# create a new project in my-app
-npm create svelte@latest my-app
+## Getting started
+
+### Install dependencies
+
+This will install the Node.js packages that this application uses to run.
+
+```sh
+npm install
 ```
 
-## Developing
+### Create `.env` file to store configuration values
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+This file will store all of the conigurable values this project depends on.
 
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+```sh
+# Create .env file based on the sample
+cp sample.env .env
 ```
 
-## Building
+### Set configuration file values
 
-To create a production version of your app:
+The following is a list of each configuration value and what they're used for.
 
-```bash
-npm run build
+- `GITHUB_TOKEN` - access token for `release-please` to create releases on your repository.
+- `GITHUB_OWNER` - owner of the GitHub repository
+- `GITHUB_REPO` - name of the GitHub repository
+
+### Bootstrap release-please
+
+Release please is a package that manages releases for your application. In essence, it creates a release pull request that gathers all of your changes since the last release from your conventional git commit messages. Then it creates a GitHub release, updates the `CHANGELOG.md` file, tags your commit and increments your `package.json`'s version number when you merge into the `main` branch.
+
+This command sets up the GitHub repository with a manifest file that the tool uses when it runs in GitHub Actions.
+
+```sh
+./scripts/release-bootstrap.mjs
+git pull
 ```
 
-You can preview the production build with `npm run preview`.
+## License
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+MIT
