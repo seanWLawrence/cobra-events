@@ -39,5 +39,7 @@ export class CloudFront extends Stack {
 				responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.SECURITY_HEADERS
 			}
 		});
+
+		new CfnOutput(this, 'DistributionDomainName', { value: distribution.distributionDomainName });
 	}
 }

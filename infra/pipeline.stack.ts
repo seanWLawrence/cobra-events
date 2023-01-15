@@ -1,15 +1,14 @@
 import { resolve } from 'path';
 import { Construct } from 'constructs';
-import { Duration, StackProps, Stack } from 'aws-cdk-lib';
+import { RemovalPolicy, Duration, StackProps, Stack } from 'aws-cdk-lib';
 import * as codepipeline from 'aws-cdk-lib/aws-codepipeline';
 import * as codebuild from 'aws-cdk-lib/aws-codebuild';
-import * as elasticBeanstalk from 'aws-cdk-lib/aws-elasticbeanstalk';
+import * as logs from 'aws-cdk-lib/aws-logs';
 import * as actions from 'aws-cdk-lib/aws-codepipeline-actions';
 import invariant from 'tiny-invariant';
 
 interface PipelineProps extends StackProps {
 	readonly branch: string;
-	readonly application: elasticBeanstalk.CfnApplication;
 }
 
 /**
@@ -22,14 +21,17 @@ export class Pipeline extends Stack {
 		const connectionArn = this.node.tryGetContext('codestarConnectionArn');
 		const repo = this.node.tryGetContext('repo');
 		const owner = this.node.tryGetContext('owner');
+		const appName = this.node.tryGetContext('appName');
 
-		invariant(props.application.applicationName);
 		invariant(connectionArn);
 		invariant(repo);
 		invariant(owner);
+		invariant(appName);
+
+		const appBranchName = `${appName}-${props.branch}`;
 
 		const pipeline = new codepipeline.Pipeline(this, 'Pipeline', {
-			pipelineName: props.application.applicationName
+			pipelineName: appBranchName
 		});
 
 		const sourceArtifact = new codepipeline.Artifact('Source');
@@ -62,7 +64,15 @@ export class Pipeline extends Stack {
 							resolve(process.cwd(), 'buildspec.yaml')
 						),
 						timeout: Duration.minutes(5),
-						logging: { cloudWatch: { enabled: true } },
+						logging: {
+							cloudWatch: {
+								enabled: true,
+								logGroup: new logs.LogGroup(this, 'LogGroup', {
+									removalPolicy: RemovalPolicy.DESTROY,
+									retention: logs.RetentionDays.ONE_WEEK
+								})
+							}
+						},
 						environment: { buildImage: codebuild.LinuxBuildImage.AMAZON_LINUX_2_4 }
 					}),
 					outputs: [buildArtifact]
@@ -75,8 +85,8 @@ export class Pipeline extends Stack {
 			actions: [
 				new actions.ElasticBeanstalkDeployAction({
 					actionName: 'Deploy',
-					applicationName: props.application.applicationName,
-					environmentName: props.branch,
+					applicationName: appName,
+					environmentName: appBranchName,
 					input: buildArtifact
 				})
 			]

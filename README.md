@@ -6,6 +6,8 @@
 
 An open source event management system.
 
+[Read the docs](https://docs.cobra.events) on GitBook
+
 ## Tenets
 
 - No percentage-based or confusing fees for organizers or buyers
@@ -13,53 +15,39 @@ An open source event management system.
 - Accessibility and performance are top priorities
 - Configurable and simple to deploy
 
-## Getting started
+## Technology
 
-### Prerequisites
+### Services
 
-- AWS account
-- AWS account bootstraped for the AWS CDK
-- This repository forked in GitHub
-- Registered domain name
-- AWS Certificate Manager Certificate for your domain with a wildcard subdomain (so we can do the `dev` and `www` subdomains)
-- AWS CodeStar Connection for your GitHub repository and branches
+- AWS for cloud infrastructure
+  - CloudFront for CDN
+  - CDK/CloudFormation for infrastructure as code
+  - Elastic Beanstalk for the Sveltekit node server hosting
+  - CodePipeline, CodeBuild and CodeStar connections for CI/CD
+  - AWS Budgets for budget alerts
+  - Cognito user pools and identity pools for authentication and authorization
+    - Login with Google
+    - Login with Facebook
+    - Login with Amazon
+    - Login with Apple
+  - DynamoDB for database (TODO)
+  - AppSync for GraphQL API (TODO)
+  - CloudWatch for metrics, logging and alarms (TODO)
+  - AWS Web Application Firewall (WAF) for DDOS and bot protection (TODO)
+- GitHub for source code hosting, versioning, releases and testing CI/CD workflows
 
-### Install dependencies
+### Packages and tools
 
-This will install the Node.js packages that this application uses to run.
-
-```sh
-npm install
-```
-
-### Create `.env` file to store configuration values for scripts directory
-
-This file will store all of the conigurable values this project's scripts depend on.
-
-```sh
-# Create .env file based on the sample
-cp sample.env .env
-```
-
-### Set scripts configuration file values
-
-The following is a list of each configuration value and what they're used for.
-
-- `GITHUB_TOKEN` - access token for `release-please` to create releases on your repository.
-- `GITHUB_OWNER` - owner of the GitHub repository
-- `GITHUB_REPO` - name of the GitHub repository
-
-### Bootstrap release-please
-
-Release please is a package that manages releases for your application. In essence, it creates a release pull request that gathers all of your changes since the last release from your conventional git commit messages. Then it creates a GitHub release, updates the `CHANGELOG.md` file, tags your commit and increments your `package.json`'s version number when you merge into the `main` branch.
-
-This command sets up the GitHub repository with a manifest file that the tool uses when it runs in GitHub Actions.
-
-```sh
-npx ts-node-esm ./scripts/release-bootstrap.ts
-
-git pull # Fetch the configuration files that release-please created
-```
+- Sveltekit, using the node adapter
+- Tailwind for styling
+- Playwright for end-to-end testing
+- Vitest for unit and integration testing
+- ESLint for linting
+- Prettier for code formatting
+- TypeScript for type checking
+- Commitizen, commitlint, release-please and husky for automating consistent commit messages, semnatic versioning and automated changelog generation
+- Node version manager (NVM) for managing node.js versions
+- Dotenv for loading environment variables
 
 ### Deploy AWS resources
 

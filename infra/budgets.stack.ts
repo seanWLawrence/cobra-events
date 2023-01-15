@@ -29,7 +29,6 @@ export class Budgets extends Stack {
 				budgetLimit: { amount: props.maxMonthlyCostInUsd, unit: 'USD' },
 				budgetType: 'COST',
 				timeUnit: 'MONTHLY',
-				autoAdjustData: { autoAdjustType: 'FORECAST' },
 				costTypes: {
 					includeCredit: true,
 					includeDiscount: true,
