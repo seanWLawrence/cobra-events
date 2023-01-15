@@ -1,0 +1,9 @@
+{
+	"budgetAlertEmails": ["sean@example.com"],
+	"domainName": "example.com",
+	"appName": "cobra-events",
+	"codestarConnectionArn": "arn:aws:codestar-connections:us-east-1:11111111111:connection/xxxxxxxxxx",
+	"certificateArn": "arn:aws:acm:us-east-1:11111111111111:certificate/xxxxxxxx",
+	"owner": "seanWLawrence",
+	"repo": "cobra-events"
+}
