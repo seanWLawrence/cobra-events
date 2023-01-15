@@ -4,6 +4,8 @@
 export const GITHUB_OWNER = 'GITHUB_OWNER';
 export const GITHUB_REPO = 'GITHUB_REPO';
 export const GITHUB_TOKEN = 'GITHUB_TOKEN';
+export const GITHUB_BRANCH = 'GITHUB_BRANCH';
+export const AWS_PROFILE = 'AWS_PROFILE';
 
 interface EnvVars {
 	[name: string]: string | undefined;

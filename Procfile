@@ -1,1 +1,1 @@
-web: node -r dotenv/config build
+web: node build

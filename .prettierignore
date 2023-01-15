@@ -14,3 +14,7 @@ yarn.lock
 
 .release-please-manifest.json
 release-please-config.json
+
+cdk.out/
+infra/tsconfig.json
+tsconfig.json

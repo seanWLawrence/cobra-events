@@ -35,5 +35,3 @@ const release = spawnSync('npx', [
 console.log(release.output.toString());
 
 console.info('Done.');
-
-export {};

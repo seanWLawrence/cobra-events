@@ -7,7 +7,7 @@ import invariant from 'tiny-invariant';
 
 interface CloudFrontProps extends StackProps {
 	readonly elasticBeanstalkDomain: string;
-	readonly subdomain: string;
+	readonly customDomains: string[];
 }
 
 /**
@@ -31,13 +31,17 @@ export class CloudFront extends Stack {
 			),
 			priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
 			enabled: true,
-			domainNames: [domainName, `${props.subdomain}.${domainName}`],
+			domainNames: props.customDomains,
 			defaultBehavior: {
 				compress: true,
-				origin: new origins.HttpOrigin(props.elasticBeanstalkDomain),
+				origin: new origins.HttpOrigin(props.elasticBeanstalkDomain, {
+					protocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY
+				}),
 				viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
 				responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.SECURITY_HEADERS
 			}
 		});
+
+		new CfnOutput(this, 'DistributionDomainName', { value: distribution.distributionDomainName });
 	}
 }
