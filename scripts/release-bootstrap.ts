@@ -1,5 +1,3 @@
-#! /usr/bin/env node
-
 /**
  * Sets up your GitHub repo for Release Please
  */
@@ -13,7 +11,7 @@ import {
 	GITHUB_OWNER,
 	GITHUB_REPO,
 	GITHUB_TOKEN
-} from './lib.mjs';
+} from './lib.js';
 
 loadDotEnvFile();
 
@@ -37,3 +35,5 @@ const release = spawnSync('npx', [
 console.log(release.output.toString());
 
 console.info('Done.');
+
+export {};
