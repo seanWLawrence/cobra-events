@@ -23,9 +23,9 @@ invariant(domainName);
 const { certificate } = new Certificate(app, 'Certificate', {});
 
 const apiDomain = `dev-api.${domainName}`;
-const server = new Server(app, 'Server', { certificate, apiDomain });
+new Server(app, 'Server', { certificate, apiDomain });
 
-const cloudfront = new CloudFront(app, 'DevDistribution', {
+new CloudFront(app, 'DevDistribution', {
 	apiDomain: `${apiDomain}`,
 	customDomains: [`dev.${domainName}`],
 	certificate
