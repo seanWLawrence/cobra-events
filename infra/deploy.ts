@@ -5,8 +5,9 @@ import invariant from 'tiny-invariant';
 import { config as loadDotEnvFile } from 'dotenv';
 
 import { Budgets } from './budgets.stack';
-import { CloudFront } from './cloudfront-stack';
-import { Pipeline } from './pipeline.stack';
+import { CloudFront } from './cloudfront.stack';
+import { Server } from './server.stack';
+import { Certificate } from './certificate.stack';
 
 loadDotEnvFile();
 
@@ -19,11 +20,15 @@ const domainName = app.node.tryGetContext('domainName');
 invariant(appName);
 invariant(domainName);
 
-const elasticBeanstalkDomainPrefix = `${appName}-dev`;
-const elasticBeanstalkDomain = `${elasticBeanstalkDomainPrefix}.us-east-1.elasticbeanstalk.com`;
+const { certificate } = new Certificate(app, 'Certificate', {});
 
-new CloudFront(app, 'DevDistribution', {
-	elasticBeanstalkDomain,
-	customDomains: [`dev.${domainName}`]
+const apiDomain = `dev-api.${domainName}`;
+const server = new Server(app, 'Server', { certificate, apiDomain });
+
+const cloudfront = new CloudFront(app, 'DevDistribution', {
+	apiDomain: `${apiDomain}`,
+	customDomains: [`dev.${domainName}`],
+	certificate
 });
-new Pipeline(app, 'DevPipeline', { branch: 'dev' });
+
+// new Pipeline(app, 'DevPipeline', { branch: 'dev' });

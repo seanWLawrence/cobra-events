@@ -2,12 +2,13 @@ import { Construct } from 'constructs';
 import { StackProps, Stack, CfnOutput } from 'aws-cdk-lib';
 import * as cloudfront from 'aws-cdk-lib/aws-cloudfront';
 import * as origins from 'aws-cdk-lib/aws-cloudfront-origins';
-import * as certificateManager from 'aws-cdk-lib/aws-certificatemanager';
 import invariant from 'tiny-invariant';
+import { ICertificate } from 'aws-cdk-lib/aws-certificatemanager';
 
 interface CloudFrontProps extends StackProps {
-	readonly elasticBeanstalkDomain: string;
+	readonly apiDomain: string;
 	readonly customDomains: string[];
+	readonly certificate: ICertificate;
 }
 
 /**
@@ -24,18 +25,14 @@ export class CloudFront extends Stack {
 		invariant(domainName);
 
 		const distribution = new cloudfront.Distribution(this, 'Distribution', {
-			certificate: certificateManager.Certificate.fromCertificateArn(
-				this,
-				'Certificate',
-				certificateArn
-			),
+			certificate: props.certificate,
 			priceClass: cloudfront.PriceClass.PRICE_CLASS_100,
 			enabled: true,
 			domainNames: props.customDomains,
 			defaultBehavior: {
 				compress: true,
-				origin: new origins.HttpOrigin(props.elasticBeanstalkDomain, {
-					protocolPolicy: cloudfront.OriginProtocolPolicy.HTTP_ONLY
+				origin: new origins.HttpOrigin(props.apiDomain, {
+					protocolPolicy: cloudfront.OriginProtocolPolicy.HTTPS_ONLY
 				}),
 				viewerProtocolPolicy: cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
 				responseHeadersPolicy: cloudfront.ResponseHeadersPolicy.SECURITY_HEADERS
