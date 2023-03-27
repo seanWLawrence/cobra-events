@@ -10,7 +10,7 @@ export default {
     };
   },
   stacks(app) {
-    const domainName = process.env.DOMAIN_NAME || "cobra.events";
+    const domainName = process.env.DOMAIN_NAME;
     const certificateArn = process.env.CERTIFICATE_ARN;
     invariant(domainName);
     invariant(certificateArn);

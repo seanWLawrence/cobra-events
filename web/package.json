@@ -2,7 +2,7 @@
   "private": true,
   "sideEffects": false,
   "scripts": {
-    "build": "remix build",
+    "build": "npm install && remix build",
     "dev": "sst env remix dev",
     "start": "remix-serve build",
     "typecheck": "tsc"
