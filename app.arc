@@ -3,7 +3,6 @@ cobra-events
 
 @aws
 region us-east-1
-profile cobra-events-admin
 
 @http
 /*

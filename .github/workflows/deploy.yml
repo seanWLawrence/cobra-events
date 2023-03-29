@@ -172,7 +172,5 @@ jobs:
       - name: 🚀 Production Deploy
         if: github.ref == 'refs/heads/main'
         run: arc deploy --production --prune
-        permissions:
-          id-token: write # This is required for requesting the JWT
         env:
           CI: true
